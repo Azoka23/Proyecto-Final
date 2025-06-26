@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultas de Gestión</title>
+    <!-- ✅ ORDEN DE CARGA CRÍTICO para el CSS: -->
+    <!-- 1. Estilos generales de la página de consulta -->
+    <link rel="stylesheet" href="/css/resultadosConsultas.css">
+    <!-- 2. TU CSS DE TABLAS UNIFICADO Y CORREGIDO -->
+    <link rel="stylesheet" href="/css/estilosTablas.css">
+    <!-- 3. Estilos RESPONSIVOS (SIEMPRE al final) -->
+    <link rel="stylesheet" href="/css/responsive.css">
+</head>
+<body>
+<div class="contenedor-consultas"> <!-- Cambiado de 'contenedor-pedidos' para consistencia -->
+    <h1>Consultas de Gestión</h1>
+
+    <div class="controles-consulta">
+        <!-- Botones para Listados Generales -->
+        <button class="boton" data-consulta="listarClientes">👤 Listar Clientes</button>
+        <button class="boton" data-consulta="top10MasVendidos">🏆 Top 10 Más Vendidos</button>
+        <button class="boton" data-consulta="top10MenosVendidos">📉 Top 10 Menos Vendidos</button>
+
+        <!-- Controles para Consultas por Cliente -->
+        <div class="filtro-cliente">
+            <label for="filtroDni">DNI Cliente:</label>
+            <input type="text" id="filtroDni" placeholder="Ingrese DNI">
+            <button class="boton" data-consulta="productosCompradosPorCliente">🛒 Productos Comprados por Cliente</button>
+            <button class="boton" data-consulta="dineroGastadoPorCliente">💰 Dinero Gastado por Cliente</button>
+        </div>
+    </div>
+
+    <!-- Área donde se mostrarán los resultados, usará la clase de tablas -->
+    <!-- ✅ Crucial: Este div envolverá la tabla generada dinámicamente -->
+    <div id="resultadosTablaContainer" class="productos-table-container">
+        <h2 id="resultadosTitulo">Resultados de la Consulta</h2>
+        <!-- La tabla se generará aquí con JavaScript -->
+    </div>
+
+    <a href="index.html" class="boton boton-volver">Volver al Inicio</a>
+</div>
+
+<script src="/js/resultadosConsulta.js"></script>
+</body>
+</html>

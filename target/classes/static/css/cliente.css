@@ -1,0 +1,113 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-image: url("../img/fondoPrincipal.jpg");
+    background-size: cover;
+    background-position: center;
+    color: white;
+}
+
+.contenedor {
+    max-width: 600px;
+    margin: 50px auto; /* Reduje el margen superior para que no esté tan abajo */
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.formulario-dni {
+    display: flex;
+    flex-direction: column; /* Asegura que los elementos internos se apilen verticalmente */
+    gap: 10px; /* Espacio entre la etiqueta y el input del DNI */
+    width: 80%;
+    margin: 0 auto 20px; /* Centra el formulario y añade margen inferior */
+}
+
+.formulario-dni label {
+    display: block; /* Asegura que la etiqueta ocupe todo el ancho disponible */
+    text-align: left; /* Alinea el texto de la etiqueta a la izquierda */
+    margin-bottom: 5px; /* Espacio entre la etiqueta y el input */
+}
+
+.formulario-dni input[type="text"] {
+    padding: 10px;
+    width: 100%; /* El input ocupa todo el ancho de su contenedor (.formulario-dni) */
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    box-sizing: border-box; /* Incluye el padding y el borde en el ancho total */
+}
+
+#formulario-registro {
+    margin-top: 20px;
+    width: 80%;
+    margin: 0 auto; /* Centra el formulario de registro */
+    text-align: left; /* Alinea el texto dentro del formulario a la izquierda */
+}
+
+#formulario-registro h2 {
+    color: white;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+#formulario-registro label {
+    display: block; /* Asegura que la etiqueta ocupe todo el ancho */
+    margin-bottom: 5px;
+}
+
+#formulario-registro input[type="text"],
+#formulario-registro input[type="email"] {
+    padding: 10px;
+    width: 100%; /* El input ocupa todo el ancho de su contenedor (#formulario-registro) */
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    box-sizing: border-box; /* Incluye el padding y el borde en el ancho total */
+    margin-bottom: 10px;
+}
+
+button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #e0d6c3;
+    color: #333;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 80%; /* Los botones también ocupan un ancho más controlado */
+    margin-left: auto;
+    margin-right: auto;
+    display: block; /* Centra el botón */
+}
+
+button:hover {
+    background-color: #d2c1a6;
+}
+
+#respuesta {
+    margin-top: 20px;
+    color: white;
+    text-align: center;
+}
+
+.boton-volver {
+    display: inline-block;
+    padding: 10px 24px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    background-color: #333;
+    color: white;
+    cursor: pointer;
+    text-decoration: none;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.boton-volver:hover {
+    background-color: #bfa07d;
+}

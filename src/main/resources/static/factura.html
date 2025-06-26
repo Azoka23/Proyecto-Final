@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Factura de Compra</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" xintegrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/css/factura.css">
+    <link rel="stylesheet" href="/css/responsive.css" />
+</head>
+<body class="bg-gray-100 p-6">
+<div class="max-w-3xl mx-auto bg-white rounded-lg shadow-md p-8" id="factura-contenido">
+    <div class="membrete">
+        <h1>Cafetienda</h1>
+        <p>Pasaje primavera 456, Lamaslinda, Buenos Aires</p>
+    </div>
+    <div class="numero-compra">
+        <strong>Número de Compra:</strong> <span id="numero-compra-detalle" class="font-semibold text-indigo-600"></span>
+    </div>
+    <h1 class="text-2xl font-semibold text-gray-800 mb-6 text-center">Factura de Compra</h1>
+    <div class="mb-4">
+        <p class="text-gray-700"><strong>Cliente:</strong> <span id="nombre-cliente-detalle" class="font-semibold text-blue-600"></span></p>
+        <p class="text-gray-700"><strong>Fecha:</strong> <span id="fecha-compra" class="font-semibold text-green-600"></span></p>
+    </div>
+    <h2 class="text-xl font-semibold text-gray-800 mb-4">Detalle de la Compra</h2>
+    <ul id="lista-compra-detalle" class="space-y-2">
+    </ul>
+    <div class="total">
+        <p>Total:</p>
+        <span id="total-compra-detalle" class="text-red-600"></span>
+    </div>
+    <div id="total-con-descuento-display" class="total mt-2 oculto">
+        <p>Total a Pagar con Descuento:</p>
+        <span id="total-final-descuento" class="text-green-600"></span>
+    </div>
+    <div id="descuento-aplicado" class="mt-4 text-gray-700 font-medium oculto">
+    </div>
+    <div id="forma-pago-seleccionada" class="mt-4 text-gray-700 font-medium oculto">
+    </div>
+
+    <div class="opciones-container">
+        <button id="btn-forma-pago" class="btn-opciones">
+            <i class="fas fa-money-bill mr-2"></i> Forma de Pago
+        </button>
+        <button id="btn-descuento" class="btn-opciones oculto">
+            <i class="fas fa-tag mr-2"></i> Descuento
+        </button>
+    </div>
+
+    <div id="lista-forma-pago" class="opciones-lista">
+        <li data-pago="efectivo">Efectivo</li>
+        <li data-pago="tarjeta">Tarjeta</li>
+        <li data-pago="transferencia">Transferencia</li>
+    </div>
+
+    <div id="lista-descuento" class="opciones-lista">
+        <li data-descuento="0">0%</li>
+        <li data-descuento="5">5%</li>
+        <li data-descuento="10">10%</li>
+        <li data-descuento="15">15%</li>
+        <li data-descuento="20">20%</li>
+    </div>
+
+    <a id="btn-imprimir-factura" class="btn-accion-factura" href="#">
+        <i class="fas fa-print mr-2"></i> Imprimir Factura
+    </a>
+
+    <!-- ✅ NUEVO BOTÓN: Volver a Compra -->
+    <a id="btn-volver-a-compra" class="btn-accion-factura" href="/compra.html">
+        <i class="fas fa-arrow-left mr-2"></i> Volver a Compra
+    </a>
+
+    <a href="/" class="btn-accion-factura"> <i class="fas fa-home mr-2"></i> HOME
+    </a>
+</div>
+
+<script src="/js/factura.js"></script>
+</body>
+</html>

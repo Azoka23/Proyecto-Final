@@ -1,0 +1,295 @@
+     /* src/main/resources/static/css/responsive.css */
+
+     /* ==================================================================== */
+     /* ESTILOS POR DEFECTO (MOBILE-FIRST)                                 */
+     /* Estos estilos se aplican a todos los dispositivos, enfocándose      */
+     /* en la experiencia móvil, y serán ajustados por las media queries.  */
+     /* ==================================================================== */
+
+     body {
+         padding: 10px; /* Padding reducido para pantallas pequeñas */
+         font-size: 14px; /* Tamaño de fuente base más pequeño */
+         min-height: 100vh; /* Asegura que el body ocupe al menos la altura de la ventana */
+     }
+
+     /* Contenedores principales en tus HTML (index, cliente, compra, etc.) */
+     .contenedor, .contenedor-stock, .contenedor-categoria, .container {
+         width: 95%; /* Ocupa la mayor parte del ancho en móvil */
+         margin: 10px auto; /* Centra el contenido con margen superior/inferior */
+         padding: 15px;
+         box-sizing: border-box; /* Incluye padding y border en el ancho total */
+     }
+
+     /* Encabezados h1 */
+     h1 {
+         font-size: 1.8em; /* Tamaño de fuente ajustable para móviles */
+         text-align: center;
+         margin-bottom: 15px;
+     }
+
+     /* === Estilos para Formularios e Inputs (General) === */
+     /* Asegura que inputs y selects ocupen todo el ancho disponible */
+     input[type="text"],
+     input[type="email"],
+     input[type="number"],
+     select {
+         width: 100%;
+         padding: 8px;
+         margin-bottom: 10px; /* Espacio entre campos */
+         box-sizing: border-box;
+         border: 1px solid #ccc;
+         border-radius: 4px;
+         font-size: 1em;
+     }
+
+     label {
+         display: block; /* Cada etiqueta en su propia línea */
+         margin-bottom: 5px;
+         font-weight: bold;
+     }
+
+     /* === Estilos para Botones (General) === */
+     /* Asegura que los botones ocupen todo el ancho y se apilen en móviles */
+     button,
+     .boton-link button, /* Para botones dentro de <a> en index.html */
+     .btn-agregar,
+     .eliminar,
+     .btn-opciones,
+     .btn-accion-factura {
+         width: 100%;
+         padding: 10px 15px;
+         margin-bottom: 10px; /* Espacio entre botones apilados */
+         box-sizing: border-box;
+         font-size: 0.9em;
+         border-radius: 5px;
+         cursor: pointer;
+         text-align: center;
+     }
+
+     /* Ajuste específico para .botones en index.html */
+     .botones {
+         display: flex;
+         flex-direction: column; /* Apila los botones de navegación */
+         gap: 10px;
+         margin-top: 20px;
+     }
+
+     /* Ajuste específico para el contenedor de la búsqueda en cliente.html */
+     .formulario-dni {
+         display: flex;
+         flex-direction: column; /* Apila elementos en móvil */
+         gap: 10px;
+         margin-bottom: 20px;
+     }
+     .formulario-dni input, .formulario-dni button {
+         width: 100%; /* Asegura que el input y botón ocupen el 100% */
+     }
+
+     /* Ajuste para formularios de registro/edición ocultos en cliente.html */
+     #formulario-registro form {
+         display: flex;
+         flex-direction: column;
+         gap: 10px;
+     }
+
+     /* Ajuste para opciones de pago/descuento en factura.html */
+     .opciones-container {
+         display: flex;
+         flex-direction: column;
+         gap: 10px;
+     }
+     .opciones-container .btn-opciones {
+         margin-bottom: 0; /* Ya tienen gap del flex-direction */
+     }
+     .opciones-lista li {
+         padding: 8px;
+         margin-bottom: 5px;
+         border: 1px solid #eee;
+         border-radius: 4px;
+     }
+
+     /* === Estilos para Tablas (Globales) === */
+     /* Se asume que tus tablas usan las clases .productos-table y están
+        dentro de un .productos-table-container (creado por JS o existente) */
+     .productos-table-container {
+         max-height: 400px; /* Altura máxima para scroll en móviles si hay muchos ítems */
+         overflow-y: auto;
+         -webkit-overflow-scrolling: touch; /* Suaviza el scroll en iOS */
+         border: 1px solid #ddd;
+         border-radius: 8px;
+         margin-top: 15px;
+         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+     }
+
+     .productos-table {
+         width: 100%;
+         border-collapse: separate;
+         border-spacing: 0;
+         table-layout: fixed; /* Crucial para simetría de columnas */
+         font-size: 0.85em; /* Fuente más pequeña para que quepa más contenido */
+     }
+
+     .productos-table th,
+     .productos-table td {
+         padding: 8px 5px; /* Menor padding en celdas para móviles */
+         text-align: left;
+         border-bottom: 1px solid #ddd;
+         border-right: 1px solid #eee;
+         white-space: nowrap;
+         overflow: hidden;
+         text-overflow: ellipsis;
+     }
+
+     .productos-table thead {
+         position: sticky; /* Encabezado fijo */
+         top: 0;
+         background-color: #f8f8f8;
+         z-index: 10;
+         box-shadow: 0 1px 1px -1px rgba(0, 0, 0, 0.08);
+     }
+
+     /* Ajustes específicos para anchos de columna en móviles si es necesario */
+     /* Esto puede requerir un CSS más específico para cada tipo de tabla si los anchos son muy diferentes */
+
+
+     /* === Paginación y Selectores === */
+     .pagination-controls, .selector-categoria {
+         display: flex;
+         flex-direction: column; /* Apilar elementos en móvil */
+         align-items: center;
+         gap: 10px;
+         margin-top: 15px;
+     }
+     .pagination-controls button {
+         width: auto; /* Permite que los botones de paginación no ocupen todo el ancho */
+         margin-bottom: 0; /* Eliminar margen extra */
+     }
+     .pagination-controls span {
+         font-size: 0.9em;
+     }
+
+     /* ============================================== */
+     /* MEDIA QUERIES (ADAPTACIÓN A PANTALLAS GRANDES) */
+     /* ============================================== */
+
+     /* --- TABLETS (PANTALLAS MEDIANAS: Desde 768px de ancho) --- */
+     @media screen and (min-width: 768px) {
+         body {
+             padding: 20px;
+             font-size: 16px;
+         }
+
+         .contenedor, .contenedor-stock, .contenedor-categoria, .container {
+             width: 90%;
+             max-width: 800px; /* Ancho máximo para tablets */
+             padding: 25px;
+         }
+
+         h1 {
+             font-size: 2.2em;
+         }
+
+         /* Formularios e Inputs */
+         /* Aquí se requiere que tus formularios tengan una estructura que permita columnas,
+            como un contenedor flex padre. Si no lo tienen, los inputs seguirán en 100%. */
+         .form-group-columns { /* Si tuvieras un div con esta clase */
+             display: flex;
+             flex-wrap: wrap;
+             gap: 20px; /* Espacio entre columnas */
+         }
+         .form-group-columns .form-group {
+             flex: 1 1 calc(50% - 20px); /* Dos columnas (aprox. 50% cada una menos el gap) */
+         }
+
+         /* Ajuste para botones */
+         button,
+         .boton-link button,
+         .btn-agregar,
+         .eliminar,
+         .btn-opciones,
+         .btn-accion-factura {
+             width: auto; /* Ancho automático para botones en fila */
+             margin-bottom: 0;
+         }
+
+         /* .botones en index.html */
+         .botones {
+             flex-direction: row; /* Botones en fila */
+             justify-content: center;
+             gap: 20px;
+         }
+
+         /* .formulario-dni en cliente.html */
+         .formulario-dni {
+             flex-direction: row; /* Elementos en fila */
+             align-items: center; /* Centrar verticalmente */
+             justify-content: center;
+         }
+         .formulario-dni input {
+             width: auto; /* Ancho automático para el input */
+             flex-grow: 1; /* Permite que el input crezca */
+         }
+         .formulario-dni button {
+             width: auto; /* Ancho automático para el botón */
+             flex-shrink: 0; /* Evita que el botón se encoja */
+         }
+
+         /* #formulario-registro form en cliente.html */
+         #formulario-registro form {
+             flex-direction: row; /* Campos en fila, ajusta el flex-wrap si quieres múltiples columnas */
+             flex-wrap: wrap;
+             gap: 20px;
+             justify-content: space-between;
+         }
+         #formulario-registro form label {
+             width: 100%; /* Las etiquetas aún pueden ocupar todo el ancho */
+         }
+         #formulario-registro form input {
+             flex: 1 1 calc(50% - 20px); /* Dos columnas para los inputs */
+         }
+
+
+         /* Tablas: tamaño de fuente más legible */
+         .productos-table {
+             font-size: 0.95em;
+         }
+         .productos-table th, .productos-table td {
+             padding: 10px 8px;
+         }
+
+         /* Paginación y Selectores */
+         .pagination-controls, .selector-categoria {
+             flex-direction: row; /* Elementos en fila */
+             justify-content: center;
+             gap: 15px;
+         }
+     }
+
+
+     /* --- DESKTOP (PANTALLAS GRANDES: Desde 1024px de ancho) --- */
+     @media screen and (min-width: 1024px) {
+         body {
+             font-size: 18px;
+         }
+
+         .contenedor, .contenedor-stock, .contenedor-categoria, .container {
+             max-width: 1100px; /* Ancho máximo para escritorios grandes */
+             padding: 30px;
+         }
+
+         h1 {
+             font-size: 2.5em;
+         }
+
+         /* #formulario-registro form en cliente.html: tres columnas */
+         #formulario-registro form input {
+             flex: 1 1 calc(33.33% - 20px); /* Tres columnas para los inputs */
+         }
+
+         .productos-table {
+             font-size: 1em;
+         }
+         .productos-table th, .productos-table td {
+             padding: 12px 15px;
+         }
+     }

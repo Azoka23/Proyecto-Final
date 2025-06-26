@@ -1,0 +1,118 @@
+.contenedor-categoria {
+  max-width: 700px;
+  margin: 50px auto;
+  background-color: rgba(255, 255, 255, 0.85);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+}
+
+.encabezado-filtrado-fijo {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: rgba(255, 255, 255, 0.85);
+  padding: 15px 20px 20px; /* Añadí padding inferior */
+  margin-bottom: 20px; /* Añadí margen inferior */
+}
+
+.encabezado-filtrado-fijo a.boton-volver-encabezado {
+  display: inline-block;
+  padding: 10px 24px; /* Ajuste del padding */
+  background-color: #333; /* Color de fondo del botón "Volver" de carga */
+  color: white;
+  border: none;
+  border-radius: 8px; /* Radio de borde del botón "Volver" de carga */
+  text-decoration: none;
+  font-size: 16px; /* Tamaño de fuente del botón "Volver" de carga */
+  margin-right: 15px; /* Espacio del título */
+  transition: background-color 0.3s ease; /* Transición del hover */
+}
+
+.encabezado-filtrado-fijo a.boton-volver-encabezado:hover {
+  background-color: #bfa07d; /* Color de fondo del hover del botón "Volver" de carga */
+}
+
+.contenedor-categoria h1 {
+  text-align: center;
+  color: #4b3d2f;
+  margin-top: 10px; /* Ajusté el margen superior */
+}
+
+.selector-categoria {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.selector-categoria label {
+  font-weight: bold;
+  color: #333;
+}
+
+.selector-categoria select,
+.selector-categoria button {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.selector-categoria button {
+  background-color: #333;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.selector-categoria button:hover {
+  background-color: #bfa07d;
+}
+
+#resultadoCategoria {
+  margin-top: 30px;
+  font-size: 16px;
+  color: #333;
+  overflow-y: auto; /* Para hacer scroll si la lista es larga */
+  max-height: 400px; /* Ajusta la altura máxima según necesites */
+}
+
+/* Estilos para los controles de paginación (similares a verStock.css) */
+.pagination-controls {
+    display: flex;
+    justify-content: center; /* Centrar los botones */
+    align-items: center;
+    gap: 10px; /* Espacio entre los elementos de paginación */
+    margin-top: 20px; /* Margen superior para separarlo de la tabla */
+    padding-top: 10px;
+    border-top: 1px solid #eee; /* Separador visual */
+}
+
+.pagination-controls button {
+    background-color: #4b3d2f; /* Color de tus encabezados de tabla */
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.pagination-controls button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.pagination-controls button:hover:not(:disabled) {
+    background-color: #6a5a40; /* Un tono más claro al pasar el mouse */
+}
+
+.pagination-controls span {
+    font-size: 15px;
+    font-weight: bold;
+    color: #4b3d2f; /* Color de texto como tus títulos */
+}

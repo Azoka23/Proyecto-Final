@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>Mi Tienda de Café</title>
+    <!-- Ruta corregida para el archivo CSS -->
+    <link rel="stylesheet" href="/css/index.css" />
+    <style>
+        body {
+          margin: 0;
+          padding: 0;
+          background-image: url("/img/fondoPrincipal.jpg");
+          background-size: cover;
+          background-position: 60% center;
+          height: 100vh;
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+    </style>
+    <link rel="stylesheet" href="/css/responsive.css" />
+</head>
+<body>
+<div class="contenedor">
+    <div class="fecha-hora" id="fechaHora"></div>
+    <h1 class="titulo">Mi Tienda de Café</h1>
+    <div class="botones">
+        <!-- Botones de navegación -->
+        <a href="../gestionProductos.html" class="boton-link">
+            <button>Gestión de productos</button>
+        </a>
+
+        <a href="../pedidos.html" class="boton-link">
+            <button>Pedidos</button>
+        </a>
+    </div>
+</div>
+
+<script>
+    // Mostrar fecha y hora actual
+    function actualizarFechaHora() {
+      const ahora = new Date();
+      const fechaHora = ahora.toLocaleString();
+      document.getElementById("fechaHora").textContent = fechaHora;
+    }
+    setInterval(actualizarFechaHora, 1000);
+    actualizarFechaHora();
+</script>
+</body>
+</html>

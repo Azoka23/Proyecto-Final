@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>Productos por Categoría</title>
+    <!-- ✅ ORDEN DE CARGA IMPORTANTE: -->
+    <link rel="stylesheet" href="/css/verPorCategoria.css" /> <!-- 1. Tus estilos de página específicos (limpios) -->
+    <link rel="stylesheet" href="/css/estilosTablas.css">     <!-- 2. TU CSS DE TABLAS UNIFICADO Y CORREGIDO -->
+    <link rel="stylesheet" href="/css/responsive.css" />      <!-- 3. Estilos Responsivos (siempre al final) -->
+    <style>
+        body {
+          margin: 0;
+          padding: 0;
+          background-image: url("/img/fondoPrincipal.jpg");
+          background-size: cover;
+          background-position: 60% center;
+          min-height: 100vh;
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+    </style>
+</head>
+<body>
+<div class="contenedor-categoria">
+    <div class="encabezado-filtrado-fijo">
+        <a href="gestionProductos.html" class="boton-volver-encabezado"> Volver</a>
+        <h1>Buscar productos por categoría</h1>
+
+        <div class="selector-categoria">
+            <label for="categoria">Seleccioná una categoría:</label>
+            <select id="categoria">
+                <option value="cafe">Café</option>
+                <option value="te">Té</option>
+                <option value="accesorio">Accesorios</option>
+            </select>
+            <!--<button id="buscarBtn">🔍 Buscar</button>-->
+        </div>
+    </div>
+
+    <!-- ✅ MODIFICACIÓN: Añade la clase 'productos-table-container' a este div -->
+    <div id="resultadoCategoria" class="productos-table-container">
+        <!-- La tabla se insertará aquí dinámicamente por JS -->
+    </div>
+
+    <div id="pagination-controls-categoria" class="pagination-controls">
+    </div>
+
+</div>
+
+<script src="/js/verPorCategoria.js"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,64 @@
+body.gestion-productos {
+    margin: 0;
+      padding: 0;
+      background-image:url ("../static/css/img/fondoPrincipal.jpg");
+        background-size: cover;
+      background-position: 60% center;
+      height: 100vh;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: white;
+      position: relative;
+}
+
+.menu-container {
+    text-align: center;
+    padding-top: 80px;
+    background-color: rgba(255, 255, 255, 0.6);
+    margin: 50px auto;
+    border-radius: 20px;
+    width: 400px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+}
+
+.menu-container h1 {
+    font-size: 2em;
+    margin-bottom: 30px;
+    color: #4b3d2f;
+}
+
+.botonera button {
+    padding: 12px 24px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      background-color: rgba(255, 255, 255, 0.8);
+      color: #333;
+      cursor: pointer;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+
+}
+
+.botonera button :hover {
+    transform: scale(1.05);
+     background-color: #e0d6c3;
+}
+
+
+a.boton {
+    display: block;
+    margin: 10px auto;
+    padding: 12px 20px;
+    font-size: 16px;
+    background-color: #333;
+    color: white;
+    text-decoration: none; /* ❌ Esto saca el subrayado */
+    border: none;
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+a.boton:hover {
+    background-color: #bfa07d;
+}

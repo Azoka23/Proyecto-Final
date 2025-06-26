@@ -1,0 +1,136 @@
+/* src/main/resources/static/css/estilosTablas.css */
+
+/* --- Contenedor de la Tabla para el Scroll y Bordes (¡Fundamental!) --- */
+/* Tus tablas DEBEN estar envueltas en un div con esta clase en el HTML:
+   <div class="productos-table-container">
+       <table class="productos-table ...">
+           ...
+       </table>
+   </div>
+*/
+.productos-table-container {
+    max-height: 500px; /* Altura máxima del área de scroll del cuerpo de la tabla */
+    overflow-y: auto;  /* Habilita el scroll vertical */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-top: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative; /* CRÍTICO para que 'position: sticky' del thead funcione correctamente */
+}
+
+/* --- Estilos Generales de TODAS las Tablas (aplica a .productos-table) --- */
+.productos-table {
+  width: 100%;
+  border-collapse: collapse; /* Elimina el espacio entre celdas */
+  margin-top: 0; /* El margen exterior lo controla el contenedor */
+  /* ESENCIAL: table-layout: fixed asegura que el ancho de las columnas se base en los TH y se mantengan fijos */
+  table-layout: fixed;
+}
+
+/* Estilos para Celdas de Encabezado (th) y Datos (td) */
+.productos-table th,
+.productos-table td {
+  padding: 12px;
+  border: 1px solid #ccc; /* Bordes de las celdas */
+  text-align: left;
+  /* ESENCIAL: box-sizing: border-box para que padding y border NO AUMENTEN el ancho de la columna */
+  box-sizing: border-box;
+  white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+  overflow: hidden; /* Oculta cualquier texto que se desborde */
+  text-overflow: ellipsis; /* Muestra puntos suspensivos (...) si el texto se corta */
+  /* Colores y fuentes base para las celdas de datos (td) */
+  color: #333; /* Color de texto predeterminado para el cuerpo de la tabla */
+  font-size: 15px; /* Tamaño de fuente predeterminado para el cuerpo de la tabla */
+}
+
+/* --- Estilos del Encabezado Fijo (thead) --- */
+.productos-table thead {
+  /* CLAVE: Permite que el encabezado se "pegue" al scroll. */
+  position: sticky;
+  top: 0; /* Lo fija en la parte superior del contenedor .productos-table-container */
+  z-index: 2; /* Asegura que el encabezado esté por encima del contenido que se desplaza */
+  background-color: #4b3d2f; /* Color de fondo oscuro para el encabezado */
+  /* CRÍTICO: display: table para que el thead se comporte como una tabla y respete table-layout: fixed */
+  display: table;
+  width: 100%; /* El thead debe ocupar el 100% del ancho de la tabla */
+  box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.2);
+}
+
+/* CRÍTICO: Estilos para el TEXTO dentro de los TH del encabezado */
+.productos-table thead th {
+    /* ✅ AQUÍ ESTÁ EL CAMBIO CLAVE PARA EL COLOR DE LAS LETRAS DEL ENCABEZADO */
+    color: #4b3d2f !important; /* Gris muy claro, para buen contraste */
+    font-weight: bold; /* Títulos en negrita */
+    font-size: 16px; /* Asegurar un tamaño de fuente claro para los títulos */
+    line-height: normal; /* Altura de línea normal para que el texto no se oculte */
+    vertical-align: middle; /* Centrado vertical del texto en la celda */
+}
+
+/* --- Estilos del Cuerpo de la Tabla (tbody) --- */
+.productos-table tbody {
+    /* CLAVE: Hace que el tbody se comporte como un bloque para que el scroll funcione */
+    display: block;
+    width: 100%; /* Ocupa el 100% del ancho del padre */
+    /* max-height y overflow-y ya los maneja .productos-table-container */
+}
+
+/* --- Filas de la Tabla (tr) --- */
+/* Asegura que las filas (tanto en thead como en tbody) se comporten como filas de tabla */
+.productos-table tr {
+  /* CLAVE: Permite que las celdas dentro de la fila se alineen correctamente con fixed layout */
+  display: table; /* O 'display: table-row'. 'table' es a menudo más robusto aquí */
+  width: 100%; /* La fila ocupa el 100% del ancho */
+  table-layout: fixed; /* También aplica fixed a las filas para alineación de celdas */
+}
+
+
+/* --- Anchos de Columna para TABLAS DE 4 COLUMNAS (verStock.html, verPorCategoria.html) --- */
+/* Estos anchos deben SUMAR EXACTAMENTE 100% */
+.productos-table th:nth-child(1),
+.productos-table td:nth-child(1) {
+  width: 10%; /* ID */
+}
+
+.productos-table th:nth-child(2),
+.productos-table td:nth-child(2) {
+  width: 45%; /* Nombre */
+}
+
+.productos-table th:nth-child(3),
+.productos-table td:nth-child(3) {
+  width: 30%; /* Categoría / Precio */
+}
+
+.productos-table th:nth-child(4),
+.productos-table td:nth-child(4) {
+  width: 15%; /* Stock */
+}
+
+
+/* --- Anchos de Columna para TABLAS DE 5 COLUMNAS (compra.html, resultadosConsulta.html) --- */
+
+/* Clase 'compra-table' (para la página de compra) */
+.productos-table.compra-table th:nth-child(1), .productos-table.compra-table td:nth-child(1) { width: 30%; } /* Nombre */
+.productos-table.compra-table th:nth-child(2), .productos-table.compra-table td:nth-child(2) { width: 15%; } /* Stock */
+.productos-table.compra-table th:nth-child(3), .productos-table.compra-table td:nth-child(3) { width: 15%; } /* Precio */
+.productos-table.compra-table th:nth-child(4), .productos-table.compra-table td:nth-child(4) { width: 15%; } /* Cantidad Input */
+.productos-table.compra-table th:nth-child(5), .productos-table.compra-table td:nth-child(5) { width: 25%; } /* Botón Agregar */
+
+/* Clase 'consulta-table' (para la página de consultas) */
+.productos-table.consulta-table th:nth-child(1), .productos-table.consulta-table td:nth-child(1) { width: 10%; } /* ID/DNI */
+.productos-table.consulta-table th:nth-child(2), .productos-table.consulta-table td:nth-child(2) { width: 25%; } /* Nombre */
+.productos-table.consulta-table th:nth-child(3), .productos-table.consulta-table td:nth-child(3) { width: 15%; } /* Categoría/Email/Fecha */
+.productos-table.consulta-table th:nth-child(4), .productos-table.consulta-table td:nth-child(4) { width: 10%; } /* Stock/Total */
+.productos-table.consulta-table th:nth-child(5), .productos-table.consulta-table td:nth-child(5) { width: 40%; } /* Detalle/Descripción */
+
+
+/* --- Estilos para el Formato Condicional del Stock (Mantener) --- */
+.stock-bajo {
+    color: #d9534f !important; /* Rojo */
+    font-weight: bold;
+}
+
+.stock-alto {
+    color: #5cb85c !important; /* Verde */
+    font-weight: bold;
+}

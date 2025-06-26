@@ -1,0 +1,162 @@
+
+/* Estilos generales del contenedor principal */
+.contenedor-stock {
+  max-width: 800px;
+  margin: 50px auto;
+  background-color: rgba(255, 255, 255, 0.85);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilos del encabezado fijo */
+.encabezado-stock-fijo {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background-color: rgba(255, 255, 255, 0.85);
+  border-bottom: 1px solid #ccc;
+}
+
+.encabezado-stock-fijo h1 {
+  color: #4b3d2f;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.boton-volver-encabezado {
+  display: inline-block;
+  padding: 10px 24px; /* Ajuste del padding */
+  background-color: #333; /* Color de fondo del botón "Volver" de carga */
+  color: white;
+  border: none;
+  border-radius: 8px; /* Radio de borde del botón "Volver" de carga */
+  text-decoration: none;
+  font-size: 16px; /* Tamaño de fuente del botón "Volver" de carga */
+  transition: background-color 0.3s ease; /* Transición del hover */
+}
+
+.boton-volver-encabezado:hover {
+  background-color: #bfa07d; /* Color de fondo del hover del botón "Volver" de carga */
+}
+
+
+/* Estilos para los controles de paginación */
+.pagination-controls {
+    display: flex;
+    justify-content: center; /* Centrar los botones */
+    align-items: center;
+    gap: 10px; /* Espacio entre los elementos de paginación */
+    margin-top: 20px; /* Margen superior para separarlo de la tabla */
+    padding-top: 10px;
+    border-top: 1px solid #eee; /* Separador visual */
+}
+
+.pagination-controls button {
+    background-color: #4b3d2f; /* Color de tus encabezados de tabla */
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.pagination-controls button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.pagination-controls button:hover:not(:disabled) {
+    background-color: #6a5a40; /* Un tono más claro al pasar el mouse */
+}
+
+.pagination-controls span {
+    font-size: 15px;
+    font-weight: bold;
+    color: #4b3d2f; /* Color de texto como tus títulos */
+}
+
+/* Estilos para el formato condicional del stock */
+.stock-bajo {
+    color: red;
+    font-weight: bold;
+}
+
+.stock-alto {
+    color: green;
+    font-weight: bold;
+}
+
+/* Estilos de la tabla de stock */
+/*.tabla-stock {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.tabla-stock th,
+.tabla-stock td {
+  padding: 12px;
+  border: 1px solid #ccc;
+  text-align: left;
+}
+
+.tabla-stock th {
+  background-color: #4b3d2f;
+  color: white;
+  position: sticky; /* Fija la celda del encabezado */
+  /*top: 0;           /* Se pega a la parte superior de su contenedor (la tabla) */
+ /* z-index: 2;      /* Asegura que esté por encima del contenido que se desplaza */
+/*}
+
+.tabla-stock tbody {
+  max-height: 300px; /* Ajusta este valor según la altura que quieras para el área visible de la tabla */
+  /*overflow-y: auto; /* Esto crea la barra de desplazamiento vertical */
+  /*display: block; /* Necesario para que max-height y overflow-y funcionen en tbody */
+/*}
+
+.tabla-stock thead {
+  display: block; /* Necesario para que el thead se comporte como un bloque separado */
+  /*width: 100%; /* Asegura que el encabezado ocupe todo el ancho de la tabla */
+/*}
+
+.tabla-stock tr {
+  display: table-row; /* Asegura que las filas se comporten como filas de tabla */
+ /* width: 100%; /* Asegura que las filas ocupe todo el ancho de la tabla */
+  /*box-sizing: border-box; /* Incluye el padding y el borde en el ancho y alto */
+/*}
+
+.tabla-stock thead th {
+  box-sizing: border-box; /* Incluye el padding y el borde en el ancho y alto */
+/*}
+
+.tabla-stock tbody td {
+  box-sizing: border-box; /* Incluye el padding y el borde en el ancho y alto */
+/*}
+
+/* Ancho de las columnas */
+/*.tabla-stock th:nth-child(1),
+.tabla-stock td:nth-child(1) {
+  width: 10%; /* Para la columna ID */
+/*}
+
+.tabla-stock th:nth-child(2),
+.tabla-stock td:nth-child(2) {
+  width: 38%; /* Para la columna Nombre */
+/*}
+
+.tabla-stock th:nth-child(3),
+.tabla-stock td:nth-child(3) {
+  width: 33%; /* Para la columna Categoría */
+/*}
+
+.tabla-stock th:nth-child(4),
+.tabla-stock td:nth-child(4) {
+  width: 19%; /* Para la columna Stock */
+/*}

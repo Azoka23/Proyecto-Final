@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>Stock de Productos</title>
+    <!-- ✅ ORDEN DE CARGA IMPORTANTE: -->
+    <link rel="stylesheet" href="/css/verStock.css" />          <!-- 1. Tus estilos de página específicos (limpios de reglas de tabla) -->
+    <link rel="stylesheet" href="/css/estilosTablas.css">      <!-- 2. TU CSS DE TABLAS UNIFICADO Y CORREGIDO -->
+    <link rel="stylesheet" href="/css/responsive.css" />       <!-- 3. Estilos Responsivos (siempre al final) -->
+    <style>
+        body {
+          margin: 0;
+          padding: 0;
+          background-image: url("/img/fondoPrincipal.jpg");
+          background-size: cover;
+          background-position: 60% center;
+          min-height: 100vh;
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+    </style>
+</head>
+<body>
+<div class="contenedor-stock">
+    <div class="encabezado-stock-fijo">
+        <a href="gestionProductos.html" class="boton-volver-encabezado"> Volver</a>
+        <h1>Stock de Productos</h1>
+    </div>
+
+    <!-- El selector de categoría se insertará aquí dinámicamente por JS (si aplica) -->
+
+    <!-- ✅ MODIFICACIÓN CRÍTICA: ENVUELVE LA TABLA EN ESTE DIV -->
+    <div id="productos-table-container-stock" class="productos-table-container">
+        <table class="productos-table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Categoría</th>
+                <th>Stock</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    <!-- FIN DE LA MODIFICACIÓN CRÍTICA -->
+
+    <!-- ✅ NUEVO ELEMENTO: Contenedor para los controles de paginación -->
+    <div id="pagination-controls" class="pagination-controls">
+        <!-- Los botones y números de página se insertarán aquí con JavaScript -->
+    </div>
+
+</div>
+<script src="/js/verStock.js"></script>
+</body>
+</html>

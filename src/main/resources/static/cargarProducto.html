@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>Cargar Producto</title>
+    <link rel="stylesheet" href="/css/cargarProducto.css" />
+    <style>
+        body {
+          margin: 0;
+          padding: 0;
+          background-image: url("/img/fondoPrincipal.jpg");
+          background-size: cover;
+          background-position: 60% center;
+          height: 100vh;
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+    </style>
+    <link rel="stylesheet" href="/css/responsive.css" />
+</head>
+<body>
+<div class="contenedor-cargar">
+    <h1>➕ Cargar Nuevo Producto</h1>
+
+    <form id="formCargar">
+        <label for="nombre">Nombre del producto:</label>
+        <input type="text" id="nombre" required />
+
+        <label for="categoria">Categoría:</label>
+        <input type="text" id="categoria" required />
+
+        <label for="stock">Stock inicial:</label>
+        <input type="number" id="stock" min="0" required />
+
+        <label for="precio">Precio:</label>
+        <input type="number" id="precio" step="0.01" min="0" required />
+        <button type="submit">📦 Cargar producto</button>
+    </form>
+
+    <div id="mensajeExito" class="mensaje-exito"></div>
+
+    <a href="gestionProductos.html" class="boton-volver"> Volver</a>
+</div>
+
+<!--<script src="/js/gestionProductos.js"></script>-->
+<script src="/js/cargarProducto.js"></script>
+</body>
+</html>

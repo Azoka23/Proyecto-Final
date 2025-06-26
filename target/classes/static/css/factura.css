@@ -1,0 +1,172 @@
+        {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-image: url("/img/fondoPrincipal.jpg");
+            background-size: cover;
+            background-position: 60% center;
+            height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+        }
+
+        /* Estilos del contenedor principal de la factura */
+        .max-w-3xl {
+            background-color: rgba(255, 255, 255, 0.8); /* Beige con opacidad */
+            border-radius: 0.5rem;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-top: 2rem;
+        }
+
+        /* Estilos generales de elementos de la factura */
+        .oculto {
+            display: none;
+        }
+
+        .producto {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .producto span {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .total {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 2px solid #e0e0e0;
+            font-size: 1.25rem;
+            font-weight: 700;
+            display: flex;
+            justify-content: space-between;
+            color: #333;
+        }
+
+        /*.btn-imprimir {*/
+        .btn-accion-factura {
+            margin-top: 2rem;
+            text-decoration: none;
+            width: 100%;
+            padding: 0.75rem;
+            background-color: #bfa07d;
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            margin-bottom: 1rem;
+        }
+
+
+/* Ajuste para el botón HOME específicamente */
+.btn-imprimir.mt-2 {
+    margin-top: 1rem; /* Reduce el margen superior para que no sea tan grande como el primer botón */
+}
+
+
+/* Ajuste para el último botón si no quieres margin-bottom en él */
+.btn-accion-factura:last-of-type {
+    margin-bottom: 0;
+}
+
+        .btn-accion-factura:hover {
+            background-color: #a68a64;
+        }
+
+        .membrete {
+            text-align: center;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #f3f4f6;
+            padding-bottom: 1rem;
+        }
+
+        .membrete h1 {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .membrete p {
+            font-size: 0.875rem;
+            color: #4b5563;
+        }
+
+        .numero-compra {
+            margin-top: 1rem;
+            text-align: right;
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        /* Estilos para los botones de opciones y sus listas desplegables */
+        .opciones-container {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+
+        .btn-opciones {
+            background-color: #bfa07d;
+            color: #fff;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 1rem; /* Duplicado, pero mantenido para consistencia si se usa en otro lugar */
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .btn-opciones:hover {
+            background-color: #a68a64;
+        }
+
+        .opciones-lista {
+            display: none;
+            background-color: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 0.375rem;
+            padding: 0.5rem 0;
+            position: absolute;
+            z-index: 10;
+            width: 200px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .opciones-lista.mostrar {
+            display: block;
+        }
+
+        .opciones-lista li {
+            padding: 0.75rem 1rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            color: #333;
+            font-size: 1rem;
+        }
+
+        .opciones-lista li:hover {
+            background-color: #f7f7f7;
+        }
+
+        .opciones-lista li.seleccionado {
+            background-color: #bfa07d;
+            color: #fff;
+        }

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Resultados de Consulta</title>
+    <link rel="stylesheet" href="css/resultadosConsulta.css">
+</head>
+<body>
+<h1>Resultados de la consulta</h1>
+
+<div class="contenedor-pedidos">
+    <table>
+        <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Categoría</th>
+            <th>Precio</th>
+            <th>Stock</th>
+            <th>Ventas</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="producto : ${resultados}">
+            <td th:text="${producto.nombre}">Nombre</td>
+            <td th:text="${producto.categoria}">Categoría</td>
+            <td th:text="${producto.precio}">Precio</td>
+            <td th:text="${producto.stock}">Stock</td>
+            <td th:text="${producto.ventas}">Ventas</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<a href="gestionProductos.html">
+    <button class="volver">Volver</button>
+</a>
+
+<!--<a th:href="@{consultas.html}"><button>Volver</button></a>-->
+</body>
+</html>

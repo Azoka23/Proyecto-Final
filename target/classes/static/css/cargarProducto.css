@@ -1,0 +1,66 @@
+.contenedor-cargar {
+  max-width: 600px;
+  margin: 50px auto;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.contenedor-cargar h1 {
+  text-align: center;
+  color: #4b3d2f;
+}
+
+#formCargar {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+#formCargar input {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+#formCargar button {
+  background-color: #333; /* Estilo del botón Guardar */
+  color: white;
+  border: none;
+  padding: 10px 24px; /* Ajustamos el padding para que sea similar al otro botón */
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Quitamos la transición de la transformación */
+}
+
+#formCargar button:hover {
+  background-color: #bfa07d; /* Estilo hover del botón Guardar */
+}
+
+.mensaje-exito {
+  margin-top: 20px;
+  text-align: center;
+  color: green;
+  font-weight: bold;
+}
+
+.boton-volver {
+  display: inline-block;
+  background-color: #333; /* ¡Mismo estilo que el botón Guardar! */
+  color: white;
+  border: none;
+  padding: 10px 24px; /* ¡Mismo padding que el botón Guardar! */
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  text-decoration: none;
+  margin-top: 20px;
+  transition: background-color 0.3s ease; /* ¡Misma transición que el botón Guardar! */
+}
+
+.boton-volver:hover {
+  background-color: #bfa07d; /* ¡Mismo estilo hover que el botón Guardar! */
+}

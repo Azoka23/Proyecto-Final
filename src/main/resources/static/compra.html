@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Compra</title>
+    <link rel="stylesheet" href="/css/compra.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" xintegrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- ✅ Asegúrate de que estilosTablas.css esté linkeado si necesitas las clases .stock-bajo/.stock-alto -->
+    <link rel="stylesheet" href="/css/estilosTablas.css">
+
+    <!--<link rel="stylesheet" href="/css/responsive.css" />-->
+</head>
+<body>
+<div class="container">
+    <header>
+        <div class="header-left"> <h1>Compra N°<span id="numero-compra">001</span></h1>
+            <p>Cliente: <span id="nombre-cliente">Juan Pérez</span></p>
+        </div>
+        <div class="header-right-icons"> <a href="/" class="boton-home">
+            <i class="fas fa-home mr-2"></i> HOME </a>
+            <img src="/img/carrito.png" class="carrito-icono" id="carrito-icono" alt="Carrito">
+        </div>
+    </header>
+
+    <section class="formulario">
+        <label for="categoria">Seleccionar categoría:</label>
+        <select id="categoria">
+            <option value="">-- Seleccionar --</option>
+            <option value="cafe">Café</option>
+            <option value="te">Té</option>
+            <option value="accesorio">Accesorios</option>
+        </select>
+
+        <div id="productos-container"></div>
+
+        <!-- ✅ NUEVO ELEMENTO: Contenedor para los controles de paginación -->
+        <div id="pagination-controls-compra" class="pagination-controls">
+            <!-- Los botones y números de página se insertarán aquí con JavaScript -->
+        </div>
+    </section>
+
+
+
+    <div class="carrito-contenido" id="carrito-contenido">
+        <h3>Carrito de compras</h3>
+        <ul id="lista-carrito"></ul>
+
+        <button id="finalizar-compra">Finalizar compra</button>
+        <button id="seguir-comprando">Seguir comprando</button>
+        <button id="vaciar-carrito">Vaciar carrito 🗑️</button>
+
+    </div>
+
+
+    <div id="detalle-compra" style="display: none;">
+        <h2>Detalle de la Compra</h2>
+        <p><strong>Cliente:</strong> <span id="nombre-cliente-detalle"></span></p>
+        <p><strong>Total:</strong> <span id="total-compra"></span></p>
+        <p><strong>Fecha de Compra:</strong> <span id="fecha-compra"></span></p>
+        <button id="imprimir-boleta">Imprimir Boleta</button>
+    </div>
+</div>
+
+<script src="/js/compra.js"></script>
+</body>
+</html>

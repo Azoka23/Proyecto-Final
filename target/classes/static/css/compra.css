@@ -1,0 +1,242 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url("/img/fondoPrincipal.jpg");
+    background-size: cover;
+    background-position: 60% center;
+    height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    position: relative;
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    margin-top: 50px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between; /* Mantiene los grupos de elementos separados */
+    align-items: center; /* Centra verticalmente los grupos */
+    margin-bottom: 20px;
+    /* position: relative;  Eliminamos esto, ya no es necesario para el botón Home */
+}
+
+/* Estilos para el nuevo contenedor de iconos de la derecha */
+.header-right-icons {
+    display: flex;
+    flex-direction: column; /* Apila los elementos verticalmente */
+    align-items: flex-end; /* Alinea los elementos a la derecha dentro de su columna */
+    gap: 5px; /* Espacio entre el botón Home y el carrito */
+}
+
+.carrito-icono {
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
+}
+
+/* Estilos para el botón Home (ahora dentro de header-right-icons) */
+.boton-home {
+    /* Eliminamos posicionamiento absoluto, top, left, transform */
+    background-color: #bfa07d;
+    color: #fff;
+    padding: 8px 12px; /* Ajusta el padding para un tamaño más compacto */
+    border-radius: 8px; /* Redondea las esquinas */
+    text-decoration: none;
+    font-size: 1.1rem; /* Tamaño del icono */
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    display: flex; /* Para centrar el icono si hay texto */
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.boton-home:hover {
+    background-color: #a68a64;
+    transform: scale(1.05); /* Efecto de escala al pasar el mouse */
+}
+
+.boton-home i {
+    margin: 0;
+}
+
+.boton-home i.mr-2 {
+    margin-right: 0.5rem; /* Ajusta este valor si necesitas más o menos espacio */
+}
+
+.formulario {
+    margin-top: 20px;
+}
+
+#productos-container {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 20px;
+}
+
+.producto {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #ccc;
+    padding: 12px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    background-color: #f5f5f5;
+    width: 100%;
+}
+
+.producto span {
+    flex-grow: 1;
+    color: #333;
+}
+
+.producto input {
+    width: 60px;
+    margin: 0 10px;
+    border-radius: 6px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    color: #333;
+}
+
+button, .boton {
+    background-color: #bfa07d;
+    border: none;
+    color: #fff;
+    padding: 10px 18px;
+    text-align: center;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+button:hover, .boton:hover {
+    background-color: #a68a64;
+    transform: scale(1.05);
+}
+
+.carrito-contenido {
+    display: none;
+    position: absolute;
+    top: 100px;
+    right: 40px;
+    width: 280px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
+    z-index: 100;
+    color: #333;
+}
+
+#detalle-compra {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 12px;
+    border: 1px solid #ccc;
+    color: #333;
+}
+
+select {
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    color: #333;
+}
+
+#categoria {
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid #c7a276;
+    background-color: #d9b382;
+    color: #333;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+#categoria:hover {
+    background-color: #e6c49f;
+    transform: scale(1.03);
+}
+
+#categoria:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(201, 145, 93, 0.7);
+    border-color: #b38b5e;
+}
+
+.eliminar {
+    background-color: #d3d3d3;
+    color: #333;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin-left: 10px;
+}
+
+.eliminar:hover {
+    background-color: #c0c0c0;
+    transform: scale(1.1);
+}
+
+.boton {
+    display: block;
+    margin: 10px auto;
+    text-decoration: none;
+    text-align: center;
+}
+
+/* Estilos para los controles de paginación */
+.pagination-controls {
+    display: flex;
+    justify-content: center; /* Centrar los botones */
+    align-items: center;
+    gap: 10px; /* Espacio entre los elementos de paginación */
+    margin-top: 20px; /* Margen superior para separarlo de la lista de productos */
+    padding-top: 10px;
+    border-top: 1px solid #eee; /* Separador visual */
+}
+
+.pagination-controls button {
+    background-color: #4b3d2f; /* Color de tus encabezados de tabla (o el que desees) */
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.pagination-controls button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.pagination-controls button:hover:not(:disabled) {
+    background-color: #6a5a40; /* Un tono más claro al pasar el mouse */
+}
+
+.pagination-controls span {
+    font-size: 15px;
+    font-weight: bold;
+    color: #4b3d2f; /* Color de texto como tus títulos (o el que desees) */
+}
+

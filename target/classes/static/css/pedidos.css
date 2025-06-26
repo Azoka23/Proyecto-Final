@@ -1,0 +1,40 @@
+body.pedidos {
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.contenedor-pedidos {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    width: 400px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+.contenedor-pedidos h1 {
+    margin-bottom: 30px;
+    font-size: 2em;
+    color: #f0e6d2;
+}
+
+.botonera a.boton {
+    display: block;
+    margin: 10px auto;
+    padding: 12px 20px;
+    font-size: 16px;
+    background-color: #ffffffcc;
+    color: #333;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.botonera a.boton:hover {
+    background-color: #d1bfa3;
+    transform: scale(1.05);
+}
+

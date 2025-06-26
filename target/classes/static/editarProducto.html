@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Producto</title>
+
+    <!-- ✅ ORDEN DE CARGA CRÍTICO para el CSS: -->
+    <!-- 1. Estilos ESPECÍFICOS de esta página (layout, formularios) -->
+    <link rel="stylesheet" href="/css/editarProducto.css">
+    <!-- 2. Estilos de tabla (unificados, si la página los usa) -->
+    <link rel="stylesheet" href="/css/estilosTablas.css">
+    <!-- 3. Estilos RESPONSIVOS (SIEMPRE al final para mayor especificidad) -->
+    <link rel="stylesheet" href="/css/responsive.css">
+
+    <!-- No más estilos inline aquí, todos los estilos de autocompletado van en editarProducto.css -->
+</head>
+<body>
+<div class="contenedor-editar">
+    <h1>Editar Producto</h1>
+
+    <div class="formulario-dni">
+        <label for="buscarNombre">Buscar producto por nombre:</label>
+        <!-- ✅ NUEVO: Contenedor para el input de búsqueda y las sugerencias -->
+        <div class="search-input-container">
+            <input type="text" id="buscarNombre" placeholder="Ingrese parte del nombre">
+            <ul id="autocomplete-suggestions"></ul>
+        </div>
+        <!-- FIN NUEVO CONTENEDOR -->
+        <button id="buscarBtn">Buscar</button>
+    </div>
+
+    <div id="respuesta"></div>
+
+    <div id="formEditar" style="display: none;">
+        <h2>Formulario de Edición</h2>
+        <form id="productoFormEditar">
+            <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" required>
+            </div>
+
+            <div class="form-group">
+                <label for="categoria">Categoría:</label>
+                <input type="text" id="categoria" name="categoria" required>
+            </div>
+
+            <div class="form-group">
+                <label for="stock">Stock:</label>
+                <input type="number" id="stock" name="stock" required>
+            </div>
+
+            <div class="form-group">
+                <label for="precio">Precio:</label>
+                <input type="number" step="0.01" id="precio" name="precio" required>
+            </div>
+
+            <div class="form-buttons">
+                <button type="submit">Actualizar Producto</button>
+                <button type="button" id="btnEliminar">Eliminar Producto</button>
+            </div>
+        </form>
+    </div>
+    <a href="gestionProductos.html" class="boton-volver">Volver</a>
+</div>
+
+<script src="/js/editarProducto.js"></script>
+</body>
+</html>

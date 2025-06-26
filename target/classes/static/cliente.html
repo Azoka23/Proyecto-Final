@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Cliente</title>
+    <link rel="stylesheet" href="/css/cliente.css">
+    <link rel="stylesheet" href="/css/responsive.css" />
+</head>
+<body>
+<div class="contenedor">
+    <h1>Cliente</h1>
+
+    <div class="formulario-dni">
+        <label for="dni">Ingresá tu DNI:</label>
+        <input type="text" id="dni" placeholder="Ej: 12345678">
+        <button onclick="buscarCliente()">Buscar cliente</button>
+    </div>
+
+    <div id="respuesta"></div>
+    <!--<button onclick="mostrarFormularioRegistro()">¿No tienes cuenta? Regístrate</button>-->
+
+    <div id="formulario-registro" style="display: none;">
+        <h2>Registro de Cliente</h2>
+        <form id="clienteForm">
+            <label for="dni-registro">DNI:</label>
+            <input type="text" id="dni-registro" name="dni" required>
+
+            <label for="nombre">Nombre Completo:</label>
+            <input type="text" id="nombre" name="nombre" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <button type="submit">Registrar cliente</button>
+        </form>
+    </div>
+    <a href="/" class="boton-volver">Volver</a>
+</div>
+
+<script src="/js/cliente.js"></script>
+</body>
+</html>

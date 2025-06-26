@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de Clientes</title>
+    <!-- ✅ ORDEN DE CARGA CRÍTICO para el CSS: -->
+    <!-- 1. Estilos específicos de esta página -->
+    <link rel="stylesheet" href="/css/listarClientes.css">
+    <!-- 2. Tu CSS de tablas unificado y corregido (IMPORTANTE para la tabla) -->
+    <link rel="stylesheet" href="/css/estilosTablas.css">
+    <!-- 3. Estilos RESPONSIVOS (SIEMPRE al final para mayor especificidad) -->
+    <link rel="stylesheet" href="/css/responsive.css">
+</head>
+<body>
+<div class="contenedor-clientes">
+    <!-- Encabezado fijo similar al de verStock/verPorCategoria -->
+    <div class="encabezado-clientes-fijo">
+        <a href="gestionProductos.html" class="boton-volver-encabezado">Volver</a>
+        <h1>Listado de Clientes</h1>
+    </div>
+
+    <!-- Contenedor donde se insertará la tabla de clientes -->
+    <!-- ✅ CLAVE: Usa la clase 'productos-table-container' para los estilos de tabla generales -->
+    <div id="clientes-tabla-container" class="productos-table-container">
+        <!-- La tabla será generada aquí por JavaScript -->
+    </div>
+</div>
+
+<!-- Script JavaScript para cargar y mostrar los clientes -->
+<script src="/js/listarClientes.js"></script>
+</body>
+</html>
