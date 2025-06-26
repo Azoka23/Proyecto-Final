@@ -18,13 +18,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // 3) Variables globales para paginación y carrito
     let total = 0;
-    // ✅ CORRECCIÓN: Inicializar el carrito cargándolo desde localStorage si existe, si no, como array vacío
-    const carrito = JSON.parse(localStorage.getItem('carritoCompra')) || [];
+    const carrito = JSON.parse(localStorage.getItem('carritoCompra')) || []; // Cargar carrito desde localStorage
 
-    let currentPage = 0; // Estado: Página actual (base 0)
-    const pageSize = 20; // Estado: Cantidad de elementos por página
-    let totalPages = 0; // Estado: Total de páginas disponibles
-    let currentCategoryFilter = categoriaSelect.value; // Estado: Filtro de categoría actual (inicializa con el valor por defecto del selector)
+    let currentPage = 0;
+    const pageSize = 20;
+    let totalPages = 0;
+    let currentCategoryFilter = categoriaSelect.value;
 
     // 4) Cargar información del cliente (si viene en la URL)
     function cargarInformacionCliente(clienteId) {
@@ -41,22 +40,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // 5) Cargar categorías en el selector (fijas)
     function cargarCategorias() {
-        const categorias = ["", "cafe", "te", "accesorio"]; // La opción vacía se mantiene para "-- Seleccionar --"
+        const categorias = ["", "cafe", "te", "accesorio"];
         categoriaSelect.innerHTML = "";
         categorias.forEach(nombre => {
             const option = document.createElement("option");
             option.value = nombre;
-            option.textContent = nombre === "" ? "-- Seleccionar --" : nombre.charAt(0).toUpperCase() + nombre.slice(1);
+            option.textContent = nombre === "" ? " Todos " : nombre.charAt(0).toUpperCase() + nombre.slice(1);
             categoriaSelect.appendChild(option);
         });
-        // Sincronizar el selector con el filtro actual si ya se ha seleccionado algo previamente
         categoriaSelect.value = currentCategoryFilter;
     }
 
     // ✅ FUNCIÓN PRINCIPAL: Carga productos paginados para una categoría específica
     async function cargarProductosPaginados(page, categoria) {
-        currentCategoryFilter = categoria; // Actualiza el filtro actual
-        productosContainer.innerHTML = ""; // Limpiar productos anteriores
+        currentCategoryFilter = categoria;
+        productosContainer.innerHTML = "";
 
         let url = `/productos?page=${page}&size=${pageSize}&sort=nombre,asc`;
         if (categoria && categoria !== "") {
@@ -66,7 +64,8 @@ document.addEventListener("DOMContentLoaded", function () {
         try {
             const response = await fetch(url);
             if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+                const errorText = await response.text();
+                throw new Error(`HTTP error! status: ${response.status} - ${errorText}`);
             }
             const pageData = await response.json();
 
@@ -83,12 +82,19 @@ document.addEventListener("DOMContentLoaded", function () {
                 productos.forEach(producto => {
                     const div = document.createElement("div");
                     div.className = "producto";
+                    div.id = `producto-${producto.id}`; // ✅ AÑADIDO: ID único para cada div de producto
 
-                    const stockClass = (producto.cantidadEnStock !== null && producto.cantidadEnStock <= 10) ? 'stock-bajo' : 'stock-alto';
+                    const stockValueForDisplay = producto.cantidadEnStock !== null && producto.cantidadEnStock !== undefined ? producto.cantidadEnStock : 'N/A';
+                    const stockValueForLogic = producto.cantidadEnStock !== null && producto.cantidadEnStock !== undefined ? producto.cantidadEnStock : 0;
+
+                    let stockClass = (stockValueForLogic <= 10 && stockValueForLogic > 0) ? 'stock-bajo' : 'stock-alto';
+                    if (stockValueForLogic === 0) {
+                        stockClass = 'stock-bajo';
+                    }
 
                     div.innerHTML = `
-                        <span>${producto.nombre} - Stock: <span class="stock ${stockClass}">${producto.cantidadEnStock || 'N/A'}</span> - $${(producto.precio || 0).toFixed(2)}</span>
-                        <input type="number" min="1" max="${producto.cantidadEnStock}" value="1" class="cantidad-input">
+                        <span>${producto.nombre} - Stock: <span class="stock ${stockClass}">${stockValueForDisplay}</span> - $${(producto.precio || 0).toFixed(2)}</span>
+                        <input type="number" min="1" max="${stockValueForLogic}" value="1" class="cantidad-input">
                         <button class="btn-agregar" data-producto='${JSON.stringify(producto)}'>Agregar</button>
                     `;
 
@@ -96,8 +102,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     const inputCantidad = div.querySelector(".cantidad-input");
                     const stockSpan = div.querySelector(".stock");
 
-                    // ✅ Deshabilitar si el stock es 0 al cargar la página
-                    if (producto.cantidadEnStock === 0) {
+                    if (stockValueForLogic <= 0) {
                         inputCantidad.value = 0;
                         inputCantidad.disabled = true;
                         btnAgregar.disabled = true;
@@ -120,7 +125,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         const existente = carrito.find(p => p.id === productoAgregado.id);
                         if (existente) {
                             if (existente.cantidad + cantidad > productoAgregado.cantidadEnStock + existente.cantidad) {
-                                mostrarMensajeFlotante("No hay suficiente stock para esa cantidad.", "error");
+                                mostrarMensajeFlotante("No hay suficiente stock para agregar esa cantidad.", "error");
                                 return;
                             }
                             existente.cantidad += cantidad;
@@ -128,19 +133,21 @@ document.addEventListener("DOMContentLoaded", function () {
                             carrito.push({ ...productoAgregado, cantidad: cantidad });
                         }
 
-                        // ✅ Actualizar stock visualmente en la misma fila del producto (solo en el frontend)
                         const nuevoStockVisual = productoAgregado.cantidadEnStock - cantidad;
                         stockSpan.textContent = nuevoStockVisual;
 
                         stockSpan.classList.remove('stock-bajo', 'stock-alto');
-                        if (nuevoStockVisual <= 10) {
+                        if (nuevoStockVisual <= 10 && nuevoStockVisual > 0) {
                             stockSpan.classList.add('stock-bajo');
-                        } else {
+                        } else if (nuevoStockVisual === 0) {
+                            stockSpan.classList.add('stock-bajo');
+                        }
+                        else {
                             stockSpan.classList.add('stock-alto');
                         }
 
                         inputCantidad.max = nuevoStockVisual;
-                        if (nuevoStockVisual === 0) {
+                        if (nuevoStockVisual <= 0) {
                             inputCantidad.value = 0;
                             inputCantidad.disabled = true;
                             btnAgregar.disabled = true;
@@ -148,7 +155,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
                         productoAgregado.cantidadEnStock = nuevoStockVisual;
                         btnAgregar.dataset.producto = JSON.stringify(productoAgregado);
-                        inputCantidad.value = 1; // Resetear cantidad a 1 para la próxima adición
+
+                        inputCantidad.value = 1;
 
                         actualizarCarrito();
                         mostrarMensajeFlotante(`"${productoAgregado.nombre}" agregado al carrito.`, "exito");
@@ -156,20 +164,97 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     productosContainer.appendChild(div);
                 });
+                // ✅ LLAMADA CLAVE: Sincronizar el stock visual con el carrito DESPUÉS de renderizar
+                sincronizarStockVisualConCarrito();
             }
-            actualizarControlesPaginacion(); // Actualizar controles de paginación después de cargar productos
+            actualizarControlesPaginacion();
         } catch (err) {
-            console.error("Error al cargar productos:", err);
-            productosContainer.innerHTML = `<p class="mensaje-error">Error al cargar los productos. Intenta de nuevo.</p>`;
-            paginationControlsDiv.innerHTML = ''; // Limpiar controles de paginación en caso de error
+            console.error("Error al cargar productos:", err); // ✅ Mensaje genérico
+            // ✅ CORRECCIÓN: Asegurar que el mensaje de error se renderice correctamente
+            productosContainer.innerHTML = `<p class="mensaje-error">Error al cargar los productos. Detalles: ${err.message}. Por favor, revisa la consola del navegador.</p>`;
+            paginationControlsDiv.innerHTML = '';
         }
+    }
+
+    // ✅ NUEVA FUNCIÓN: Sincroniza el stock visual en la página con los productos que ya están en el carrito
+    function sincronizarStockVisualConCarrito() {
+        console.log("--- Sincronizando stock visual con carrito ---");
+        console.log("Carrito actual (localStorage):", JSON.stringify(carrito));
+
+        if (carrito.length === 0) {
+            console.log("Carrito vacío, no hay stock que sincronizar.");
+            return;
+        }
+
+        carrito.forEach(itemCarrito => {
+            console.log(`Intentando sincronizar producto ID: ${itemCarrito.id}, Cantidad en carrito: ${itemCarrito.cantidad}`);
+            // ✅ MODIFICADO: Buscar el div de producto por su ID directo
+            const productoDiv = document.getElementById(`producto-${itemCarrito.id}`);
+
+            if (productoDiv) {
+                console.log(`Producto DIV encontrado para ID ${itemCarrito.id}.`);
+                console.log(`Inner HTML of productoDiv:`, productoDiv.innerHTML); // DEBUG: Muestra el contenido del div
+
+                const btnAgregar = productoDiv.querySelector(".btn-agregar");
+                const inputCantidad = productoDiv.querySelector(".cantidad-input");
+                const stockSpan = productoDiv.querySelector(".stock");
+
+                console.log(`Resultado querySelector .btn-agregar:`, btnAgregar); // DEBUG: Resultado de la búsqueda del botón
+                console.log(`Resultado querySelector .cantidad-input:`, inputCantidad);
+                console.log(`Resultado querySelector .stock:`, stockSpan);
+
+
+                if (!btnAgregar || !inputCantidad || !stockSpan) { // ✅ Añadido: Manejo de error si no se encuentran los elementos esperados
+                    console.error(`ERROR: No se encontraron todos los elementos necesarios (btn-agregar, cantidad-input, stock) para el producto ID ${itemCarrito.id}. Saltando sincronización para este ítem.`);
+                    return; // Saltar a la siguiente iteración del forEach
+                }
+
+
+                let productoDataFromButton = JSON.parse(btnAgregar.dataset.producto);
+
+                const stockEnBoton = productoDataFromButton.cantidadEnStock;
+                const cantidadYaEnCarrito = itemCarrito.cantidad;
+
+                const nuevoStockVisual = stockEnBoton - cantidadYaEnCarrito;
+
+                console.log(`  - ${itemCarrito.nombre}: Stock inicial (desde botón) = ${stockEnBoton}, Cantidad en carrito = ${cantidadYaEnCarrito}, Nuevo stock visual = ${nuevoStockVisual}`);
+
+                stockSpan.textContent = nuevoStockVisual;
+                stockSpan.classList.remove('stock-bajo', 'stock-alto');
+                if (nuevoStockVisual <= 10 && nuevoStockVisual > 0) {
+                    stockSpan.classList.add('stock-bajo');
+                } else if (nuevoStockVisual <= 0) {
+                     stockSpan.classList.add('stock-bajo');
+                }
+                else {
+                    stockSpan.classList.add('stock-alto');
+                }
+
+                inputCantidad.max = nuevoStockVisual;
+                if (nuevoStockVisual <= 0) {
+                    inputCantidad.value = 0;
+                    inputCantidad.disabled = true;
+                    btnAgregar.disabled = true;
+                } else {
+                    inputCantidad.disabled = false;
+                    btnAgregar.disabled = false;
+                }
+
+                productoDataFromButton.cantidadEnStock = nuevoStockVisual;
+                btnAgregar.dataset.producto = JSON.stringify(productoDataFromButton);
+                console.log(`  - Dataset actualizado para ${itemCarrito.nombre}:`, JSON.parse(btnAgregar.dataset.producto));
+
+            } else {
+                console.log(`Producto ID ${itemCarrito.id} NO encontrado en la página actual. (Puede estar en otra página de la paginación).`);
+            }
+        });
+        console.log("--- Sincronización de stock visual finalizada ---");
     }
 
     // ✅ FUNCIÓN: Actualizar los controles de paginación
     function actualizarControlesPaginacion() {
-        paginationControlsDiv.innerHTML = ''; // Limpiar controles existentes
+        paginationControlsDiv.innerHTML = '';
 
-        // Botón "Anterior"
         const prevButton = document.createElement('button');
         prevButton.textContent = 'Anterior';
         prevButton.disabled = currentPage === 0;
@@ -178,12 +263,10 @@ document.addEventListener("DOMContentLoaded", function () {
         });
         paginationControlsDiv.appendChild(prevButton);
 
-        // Indicador de página (ej. "Página 1 de 5")
         const pageInfo = document.createElement('span');
         pageInfo.textContent = `Página ${currentPage + 1} de ${totalPages}`;
         paginationControlsDiv.appendChild(pageInfo);
 
-        // Botón "Siguiente"
         const nextButton = document.createElement('button');
         nextButton.textContent = 'Siguiente';
         nextButton.disabled = currentPage === totalPages - 1 || totalPages === 0;
@@ -205,40 +288,48 @@ document.addEventListener("DOMContentLoaded", function () {
             const btnEliminar = document.createElement("button");
             btnEliminar.className = "eliminar";
             btnEliminar.textContent = "❌";
-            // ✅ CORRECCIÓN: Event listener del botón eliminar
             btnEliminar.addEventListener("click", () => {
-                const productoEliminado = carrito[idx]; // Obtener el producto antes de eliminarlo
-                carrito.splice(idx, 1); // Eliminar el elemento del carrito
-                actualizarCarrito(); // Volver a renderizar el carrito
+                const productoEliminadoDelCarrito = carrito.splice(idx, 1)[0];
+                actualizarCarrito();
 
-                // ✅ MEJORA: Restaurar el stock visualmente del producto si está en la página actual
-                // No es necesario recargar toda la página si solo se actualiza un stock
-                const productoDivEnDOM = productosContainer.querySelector(`[data-producto*='"id":${productoEliminado.id}']`);
+                const productoDivEnDOM = document.getElementById(`producto-${productoEliminadoDelCarrito.id}`); // ✅ MODIFICADO: Buscar por ID
+
                 if (productoDivEnDOM) {
-                    let productoDataBtn = JSON.parse(productoDivEnDOM.querySelector('.btn-agregar').dataset.producto);
-                    const cantidadRestaurada = productoDataBtn.cantidadEnStock + productoEliminado.cantidad;
+                    const btnAgregar = productoDivEnDOM.querySelector('.btn-agregar');
+                    const inputCantidad = productoDivEnDOM.querySelector('.cantidad-input');
+                    const stockSpan = productoDivEnDOM.querySelector('.stock');
 
-                    productoDivEnDOM.querySelector('.stock').textContent = cantidadRestaurada;
-                    productoDivEnDOM.querySelector('.cantidad-input').max = cantidadRestaurada;
-                    productoDivEnDOM.querySelector('.cantidad-input').disabled = false;
-                    productoDivEnDOM.querySelector('.btn-agregar').disabled = false;
-
-                    // Actualizar clase de color de stock
-                    productoDivEnDOM.querySelector('.stock').classList.remove('stock-bajo', 'stock-alto');
-                    if (cantidadRestaurada <= 10) {
-                        productoDivEnDOM.querySelector('.stock').classList.add('stock-bajo');
-                    } else {
-                        productoDivEnDOM.querySelector('.stock').classList.add('stock-alto');
+                    if (!btnAgregar || !inputCantidad || !stockSpan) { // ✅ Añadido: Manejo de error
+                        console.error(`ERROR: No se encontraron todos los elementos necesarios (btn-agregar, cantidad-input, stock) para el producto ID ${productoEliminadoDelCarrito.id} al eliminar del carrito.`);
+                        // En este caso, no podemos restaurar el stock visualmente.
+                        return;
                     }
 
-                    // Actualizar el dataset.producto en el botón para reflejar el nuevo stock
-                    productoDataBtn.cantidadEnStock = cantidadRestaurada;
-                    productoDivEnDOM.querySelector('.btn-agregar').dataset.producto = JSON.stringify(productoDataBtn);
+                    let productoDataFromButton = JSON.parse(btnAgregar.dataset.producto);
+                    const cantidadRestaurada = productoDataFromButton.cantidadEnStock + productoEliminadoDelCarrito.cantidad;
+
+                    stockSpan.textContent = cantidadRestaurada;
+                    stockSpan.classList.remove('stock-bajo', 'stock-alto');
+                    if (cantidadRestaurada <= 10 && cantidadRestaurada > 0) {
+                        stockSpan.classList.add('stock-bajo');
+                    } else if (cantidadRestaurada === 0) {
+                        stockSpan.classList.add('stock-bajo');
+                    }
+                    else {
+                        stockSpan.classList.add('stock-alto');
+                    }
+
+                    inputCantidad.max = cantidadRestaurada;
+                    inputCantidad.disabled = false;
+                    btnAgregar.disabled = false;
+
+                    productoDataFromButton.cantidadEnStock = cantidadRestaurada;
+                    btnAgregar.dataset.producto = JSON.stringify(productoDataFromButton);
                 } else {
-                    // Si el producto no está en la vista actual, recargar la página para asegurar la coherencia
-                    cargarProductosPaginados(currentPage, currentCategoryFilter);
+                    // Si el producto no está en la vista actual, no podemos restaurar su stock visual aquí directamente.
+                    // La sincronización al recargar la página lo manejará.
                 }
-                mostrarMensajeFlotante(`"${productoEliminado.nombre}" eliminado del carrito.`, "info");
+                mostrarMensajeFlotante(`"${productoEliminadoDelCarrito.nombre}" eliminado del carrito.`, "info");
             });
 
             li.appendChild(btnEliminar);
@@ -247,7 +338,6 @@ document.addEventListener("DOMContentLoaded", function () {
             total += item.precio * item.cantidad;
         });
         totalSpan.textContent = `$${total.toFixed(2)}`;
-        // ✅ Guardar el carrito actualizado en localStorage
         localStorage.setItem('carritoCompra', JSON.stringify(carrito));
     }
 
@@ -269,24 +359,22 @@ document.addEventListener("DOMContentLoaded", function () {
             opacity: 0;
             transition: opacity 0.5s ease-in-out;
             max-width: 80%;
-            pointer-events: none; /* Permite clics a través del mensaje */
-            color: white; /* Color de texto base para los mensajes */
+            pointer-events: none;
+            color: white;
         `;
 
         if (tipo === "error") {
-            mensajeDiv.style.backgroundColor = 'rgba(255, 99, 71, 0.9)'; // Tomato
+            mensajeDiv.style.backgroundColor = 'rgba(255, 99, 71, 0.9)';
         } else if (tipo === "exito") {
-            mensajeDiv.style.backgroundColor = 'rgba(60, 179, 113, 0.9)'; // MediumSeaGreen
+            mensajeDiv.style.backgroundColor = 'rgba(60, 179, 113, 0.9)';
         } else { // info
-            mensajeDiv.style.backgroundColor = 'rgba(70, 130, 180, 0.9)'; // SteelBlue
+            mensajeDiv.style.backgroundColor = 'rgba(70, 130, 180, 0.9)';
         }
 
         document.body.appendChild(mensajeDiv);
 
-        // Fade in
         setTimeout(() => { mensajeDiv.style.opacity = 1; }, 10);
 
-        // Fade out and remove
         setTimeout(() => {
             mensajeDiv.style.opacity = 0;
             mensajeDiv.addEventListener('transitionend', () => mensajeDiv.remove());
@@ -307,16 +395,14 @@ document.addEventListener("DOMContentLoaded", function () {
         const fecha = new Date().toLocaleDateString();
         const numeroCompra = Math.floor(Math.random() * 1000000);
 
-        // ✅ Usar 'carritoCompra' como clave para el carrito en localStorage
         localStorage.setItem("carritoCompra", JSON.stringify(carrito));
         localStorage.setItem("nombreCliente", nombre);
         localStorage.setItem("fecha", fecha);
         localStorage.setItem("total", total.toFixed(2));
         localStorage.setItem("numeroCompra", numeroCompra);
 
-        // Guardar el clienteId en localStorage
         if (clienteId) {
-            localStorage.setItem("clienteIdCompra", clienteId); // ✅ Nueva clave para evitar colisiones
+            localStorage.setItem("clienteIdCompra", clienteId);
         } else {
             console.warn("ClienteId no disponible para guardar en localStorage al finalizar compra.");
         }
@@ -329,22 +415,20 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     document.getElementById("vaciar-carrito").addEventListener("click", () => {
-        carrito.length = 0; // Vaciar el array del carrito
-        actualizarCarrito(); // Actualizar la vista del carrito (quedará vacío)
-        // Recargar la página actual de productos para actualizar stocks visuales
+        carrito.length = 0;
+        actualizarCarrito();
+        // ✅ CLAVE: Al vaciar el carrito, recargamos los productos para que el stock vuelva a su estado original del backend.
         cargarProductosPaginados(currentPage, currentCategoryFilter);
-        mostrarMensajeFlotante("El carrito ha sido vaciado.", "info");
+        mostrarMensajeFlotante("El carrito ha sido vaciado. El stock de los productos ha sido restaurado.", "info");
     });
 
     // 9) Inicialización al cargar la página
     if (clienteId) {
         cargarInformacionCliente(clienteId);
     } else {
-        // ✅ CORRECCIÓN: Si no viene clienteId en la URL, intentar cargarlo de localStorage
         const storedClienteId = localStorage.getItem("clienteIdCompra");
         if (storedClienteId) {
             cargarInformacionCliente(storedClienteId);
-            // También podemos actualizar el URL para que al recargar la página siga teniendo el ID
             window.history.replaceState({}, document.title, window.location.pathname + `?clienteId=${storedClienteId}`);
         } else {
             console.error("No se encontró el clienteId en la URL ni en localStorage. Se mostrará un cliente genérico.");
@@ -361,5 +445,5 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Cargar productos al inicio (primera página de la categoría por defecto)
     cargarProductosPaginados(currentPage, currentCategoryFilter);
-    actualizarCarrito(); // Asegurar que el carrito se renderice si ya tiene algo en localStorage
+    actualizarCarrito();
 });

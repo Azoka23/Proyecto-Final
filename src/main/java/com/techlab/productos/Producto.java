@@ -6,9 +6,25 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
+// ✅ Importaciones de Jackson
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonCreator; // Aunque no siempre necesario aquí, es bueno tenerlo
+
 
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)  // Estrategia de herencia de JPA
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+// ✅ ANOTACIONES CLAVE PARA LA DESERIALIZACIÓN DE CLASES ABSTRACTAS
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME, // Usa el nombre de la subclase como identificador
+        include = JsonTypeInfo.As.PROPERTY, // El identificador será una propiedad en el JSON
+        property = "categoria" // ✅ La propiedad en el JSON que contendrá el tipo (ej. "Cafe", "Te")
+)
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = Cafe.class, name = "Cafe"), // Mapea "Cafe" en el JSON a la clase Cafe
+        @JsonSubTypes.Type(value = Te.class, name = "Te"),     // Mapea "Te" en el JSON a la clase Te
+        @JsonSubTypes.Type(value = Accesorio.class, name = "Accesorio") // Mapea "Accesorio" en el JSON a la clase Accesorio
+})
 public abstract class Producto {
 
     @Id
@@ -19,14 +35,12 @@ public abstract class Producto {
     private double precio;
     private int cantidadEnStock;
 
-    private String categoria;
+    private String categoria; // ✅ Este campo es el "discriminador" que usaremos
 
-
-
-
-
-
-    // ✅ Constructor vacío obligatorio
+    // ✅ Constructor vacío obligatorio.
+    // También puedes añadir @JsonCreator al constructor que uses para la deserialización
+    // si no es el constructor por defecto. Para clases abstractas es más complejo,
+    // por eso JsonTypeInfo es la mejor opción.
     public Producto() {}
 
     public Producto(String nombre, double precio, int cantidadEnStock) {

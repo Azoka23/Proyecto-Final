@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.techlab.CafetiendaApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.331 s -- in com.techlab.CafetiendaApplicationTests
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.294 s -- in com.techlab.CafetiendaApplicationTests
