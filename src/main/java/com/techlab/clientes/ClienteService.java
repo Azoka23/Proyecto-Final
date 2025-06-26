@@ -8,6 +8,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+// ✅ Importaciones para paginación
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 @Service
 public class ClienteService {
 
@@ -30,6 +34,10 @@ public class ClienteService {
         if (cliente.getNombre() != null && !cliente.getNombre().trim().isEmpty()) {
             cliente.setNombre(toTitleCase(cliente.getNombre()));
         }
+        // Opcional: Podrías añadir lógica para el apellido si tu Cliente lo tuviera
+        // if (cliente.getApellido() != null && !cliente.getApellido().trim().isEmpty()) {
+        //     cliente.setApellido(toTitleCase(cliente.getApellido()));
+        // }
         return clienteRepository.save(cliente);
     }
 
@@ -42,12 +50,27 @@ public class ClienteService {
         if (cliente.getNombre() != null && !cliente.getNombre().trim().isEmpty()) {
             cliente.setNombre(toTitleCase(cliente.getNombre()));
         }
+        // Opcional: Podrías añadir lógica para el apellido si tu Cliente lo tuviera
+        // if (cliente.getApellido() != null && !cliente.getApellido().trim().isEmpty()) {
+        //     cliente.setApellido(toTitleCase(cliente.getApellido()));
+        // }
         return clienteRepository.save(cliente);
     }
 
-    // Método para listar todos los clientes
+    // Método para listar todos los clientes (se mantiene para compatibilidad si se usa en otros lados sin paginación)
     public List<Cliente> listarClientes() {
         return clienteRepository.findAll();
+    }
+
+    // ✅ NUEVO MÉTODO: Listar clientes con paginación
+    /**
+     * Lista clientes de forma paginada.
+     * @param pageable Objeto Pageable que contiene información de la paginación (número de página, tamaño, ordenamiento).
+     * @return Un objeto Page que contiene la lista de clientes para la página solicitada,
+     * junto con información de paginación (total de elementos, total de páginas, etc.).
+     */
+    public Page<Cliente> listarClientesPaginados(Pageable pageable) {
+        return clienteRepository.findAll(pageable);
     }
 
     /**

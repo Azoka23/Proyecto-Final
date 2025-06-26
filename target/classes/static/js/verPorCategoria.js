@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const paginationControlsDiv = document.getElementById("pagination-controls-categoria");
 
     let currentPage = 0;
-    const pageSize = 20;
+    const pageSize = 15;
     let totalPages = 0;
     // Inicializa con el valor por defecto del selector al cargar la página
     let currentCategoryFilter = categoriaSelector.value;

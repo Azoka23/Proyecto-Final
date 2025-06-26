@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const paginationControlsDiv = document.getElementById("pagination-controls");
 
     let currentPage = 0; // Estado: Página actual (base 0)
-    const pageSize = 20; // Estado: Cantidad de elementos por página
+    const pageSize = 15; // Estado: Cantidad de elementos por página
     let totalPages = 0; // Estado: Total de páginas disponibles
     let currentCategoryFilter = "todos"; // Estado: Filtro de categoría actual
 

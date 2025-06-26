@@ -6,7 +6,12 @@ import com.techlab.excepciones.ClienteNoEncontradoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.List; // Se mantiene si otros métodos lo usan, pero el principal será Page
+
+// ✅ Importaciones para paginación
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 
 @RestController
 @RequestMapping("/clientes")
@@ -15,18 +20,19 @@ public class ClienteController {
     @Autowired
     private ClienteService clienteService;
 
-    // Obtener todos los clientes
+    // ✅ MODIFICADO: Ahora este método lista clientes con paginación
+    /**
+     * Obtiene una lista paginada de clientes.
+     * Los parámetros de paginación (page, size, sort) son inyectados automáticamente por Spring.
+     * @param pageable Objeto Pageable con la información de la página, tamaño y ordenamiento.
+     * @return Un objeto Page que contiene los clientes para la página solicitada.
+     */
     @GetMapping
-    public List<Cliente> listarClientes() {
-        return clienteService.listarClientes();
+    public Page<Cliente> listarClientesPaginados(Pageable pageable) {
+        return clienteService.listarClientesPaginados(pageable);
     }
 
     // Obtener un cliente por su DNI
-    //@GetMapping("/{dni}")
-    //public Cliente obtenerCliente(@PathVariable String dni) throws ClienteNoEncontradoException {
-      //  return clienteService.buscarClientePorDni(dni);
-    //}
-
     @GetMapping("/{dni}")
     public ResponseEntity<Cliente> obtenerCliente(@PathVariable String dni) {
         try {
@@ -50,4 +56,3 @@ public class ClienteController {
         return clienteService.actualizarCliente(cliente);
     }
 }
-
