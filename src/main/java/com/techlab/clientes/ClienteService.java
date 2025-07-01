@@ -50,7 +50,7 @@ public class ClienteService {
         if (cliente.getNombre() != null && !cliente.getNombre().trim().isEmpty()) {
             cliente.setNombre(toTitleCase(cliente.getNombre()));
         }
-        // Opcional: Podrías añadir lógica para el apellido si tu Cliente lo tuviera
+        // Opcional: Puedo añadir lógica para el apellido si tu Cliente lo tuviera
         // if (cliente.getApellido() != null && !cliente.getApellido().trim().isEmpty()) {
         //     cliente.setApellido(toTitleCase(cliente.getApellido()));
         // }

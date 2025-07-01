@@ -1,136 +1,135 @@
-Proyecto  Final  :  Cafetienda
+☕ Proyecto Final: Sistema de Gestión para Cafeterías
+Este repositorio contiene la implementación final de un sistema web integral, diseñado para la gestión eficiente de productos, clientes y el proceso de compra en una cafetería. Desarrollado con Spring Boot, este proyecto fusiona una potente lógica de backend con una interfaz de usuario interactiva y fluida.
 
-Este repositorio contiene el código fuente del proyecto "Cafetienda", una aplicación web para la gestión de productos, clientes y compras, desarrollada con Spring Boot.
+✨ Características Destacadas
+Este sistema ha sido desarrollado con el objetivo de ofrecer una experiencia completa y optimizada para la administración de un negocio de cafetería, incluyendo las siguientes funcionalidades clave:
 
-🚀 Ramas del Proyecto
-El proyecto cuenta con dos ramas principales:
+📦 Gestión de Productos
+Visualización Detallada: Acceso a un listado completo del stock de productos (Café, Té, Accesorios).
 
-main: Contiene la versión estable y original de la aplicación, configurada para interactuar con una base de datos MySQL (requiere configuración manual de credenciales si se ejecuta localmente).
+Filtrado por Categoría: Permite filtrar productos de manera intuitiva por categorías específicas (Café, Té, Accesorios).
 
-demo-h2: Esta rama es la versión de demostración y la que debe ser evaluada para la corrección. Incluye la configuración necesaria para utilizar una base de datos H2 en memoria, facilitando su ejecución inmediata sin necesidad de una instalación de MySQL.
+Paginación Eficiente: La visualización de productos está paginada, facilitando la navegación a través de grandes inventarios.
 
-🚨 ¡ATENCIÓN ! 🚨 Para la evaluación de la integración con H2 y la funcionalidad de paginación/filtrado/compra sin una base de datos externa, por favor, asegúrese de cambiar a la rama demo-h2 antes de ejecutar el proyecto.
+Indicadores de Stock: Alertas visuales para productos con stock bajo, permitiendo una gestión proactiva.
 
-git checkout demo-h2
+CRUD Completo: Funcionalidades de Crear, Leer, Actualizar y Eliminar productos para un control total del inventario.
 
-✨ Características Principales (Rama demo-h2 )
-La rama demo-h2 implementa las siguientes funcionalidades clave:
+👤 Gestión de Clientes
+Listado Paginado: Visualización de clientes con paginación para una navegación cómoda.
 
-Gestión de Productos:
+Búsqueda por DNI: Permite localizar clientes rápidamente utilizando su número de DNI.
 
-Visualización de todo el stock de productos (Café, Té, Accesorios).
+Ordenamiento Dinámico: Los listados de clientes pueden ordenarse por DNI, Nombre y Email (ascendente/descendente) con un simple clic en el encabezado de la tabla.
 
-Filtrado de productos por categoría (Cafe, Te, Accesorio).
+Registro de Clientes: Facilidad para agregar nuevos clientes a la base de datos si no se encuentran registrados.
 
-Paginación en la lista de productos para una navegación eficiente.
+🛒 Proceso de Compra Avanzado
+Formulario Interactivo: Interfaz de compra dinámica que muestra productos con su stock y precios actualizados.
 
-Indicadores visuales de stock bajo.
+Gestión de Carrito: Funcionalidad para añadir productos al carrito, ajustar cantidades y eliminar ítems de forma flexible.
 
-Funcionalidad de CRUD (Crear, Leer, Actualizar, Eliminar) para productos.
+Sincronización de Stock en Frontend: El stock visible se actualiza en tiempo real en el frontend al agregar productos al carrito y se mantiene descontado incluso al navegar fuera y volver a la página de compra (utilizando localStorage para persistencia del carrito).
 
-Gestión de Clientes:
+Registro de Compra Condicional: La compra se registra y el stock se descuenta permanentemente en la base de datos solo al presionar "Imprimir Factura" en la página de factura. Esto permite al usuario "arrepentirse" de la compra si vuelve desde la factura sin haberla finalizado.
 
-Búsqueda de clientes por DNI.
-
-Permite agregar nuevos clientes si no se encuentran en la base de datos.
-
-Proceso de Compra:
-
-Formulario de compra interactivo que lista productos con stock y precios.
-
-Funcionalidad de añadir productos al carrito, ajustar cantidades y eliminar ítems.
-
-Actualización dinámica del stock visual y del total de la compra.
-
-Finalización de la compra con generación de factura (guarda datos de la compra en localStorage).
-
-Base de Datos H2 en Memoria:
-
-Configurada para cargarse automáticamente con datos de prueba (data.sql) al iniciar la aplicación.
-
-No requiere instalación de una base de datos externa.
+Generación de Factura: Una vez finalizada, se genera una factura detallada para la impresión, con opciones de forma de pago y aplicación de descuentos.
 
 🛠️ Tecnologías Utilizadas
-Backend:
+Este proyecto ha sido construido utilizando una combinación de tecnologías modernas para garantizar robustez y escalabilidad:
 
-Java 21
+Backend
+Java 21: Lenguaje de programación principal.
 
-Spring Boot 3.x: Framework para el desarrollo de la aplicación.
+Spring Boot 3.x: Framework líder para el desarrollo rápido de aplicaciones Java empresariales.
 
-Spring Data JPA / Hibernate: Para la persistencia de datos.
+Spring Data JPA / Hibernate: Para una gestión de persistencia de datos eficiente y abstracta.
 
-H2 Database (en memoria): Base de datos ligera para el entorno de demostración.
+MySQL: Base de datos relacional para el almacenamiento persistente de la información.
 
-Maven: Gestor de dependencias del proyecto.
+Maven: Herramienta para la gestión de dependencias y el ciclo de vida del proyecto.
 
-Frontend:
+Frontend
+HTML5: Estructura semántica de las páginas web.
 
-HTML5
+CSS3: Estilos personalizados, incluyendo un diseño responsivo para adaptarse a diferentes dispositivos, estilos específicos para tablas, paginación y mensajes flotantes.
 
-CSS3 (con estilos para tablas, paginación, mensajes flotantes, etc.)
+JavaScript (Vanilla JS): Lógica interactiva del lado del cliente, manipulación del DOM y comunicación con el backend (Fetch API).
 
-JavaScript (Vanilla JS): Para la lógica interactiva del lado del cliente.
+Thymeleaf: Motor de plantillas del lado del servidor para la renderización dinámica de las vistas HTML.
 
-Thymeleaf: Motor de plantillas para renderizar las vistas HTML.
+Font Awesome: Para íconos escalables y personalizables.
 
-⚙️ Configuración y Ejecución (Rama demo-h2)
-Siga estos pasos para levantar y probar la aplicación en la rama demo-h2:
+📂 Organización del Código
+El proyecto sigue una estructura modular y organizada, facilitando la comprensión y el mantenimiento. Los paquetes principales del backend y los directorios de recursos del frontend están estructurados de la siguiente manera:
 
-Clonar el Repositorio:
 
-git clone https://github.com/[Azoka23]/[cafetienda].git
-cd [cafetienda]
 
-Cambiar a la Rama demo-h2:
-git checkout demo-h2
 
-Requisitos Previos:
+⚙️ Configuración y Ejecución
+Siga estos pasos para levantar y probar la aplicación en su entorno local:
 
-Tener Java Development Kit (JDK) 21 o superior instalado.
+1. Clonar el Repositorio
+   Abra su terminal (o Git Bash) y clone el proyecto usando la URL de su repositorio de GitHub:
 
-Tener Maven instalado (o usar el mvnw wrapper incluido en el proyecto).
+git clone https://github.com/Azoka23/Proyecto-Final.git
+cd Proyecto-Final
 
-Construir el Proyecto:
-Abre tu terminal en la raíz del proyecto y ejecuta el siguiente comando:
+2. Configuración de la Base de Datos (MySQL)
+   Este proyecto está configurado para usar MySQL. Necesitará:
+
+Una instancia de MySQL en ejecución (local o remota).
+
+Crear una base de datos específica para este proyecto (ej. cafetienda_db).
+
+Actualizar las credenciales de conexión en el archivo src/main/resources/application.properties (o application.yml):
+
+# Ejemplo de configuración para application.properties
+spring.datasource.url=jdbc:mysql://localhost:3306/cafetienda_db?useSSL=false&serverTimezone=UTC
+spring.datasource.username=tu_usuario_mysql
+spring.datasource.password=tu_contraseña_mysql
+spring.jpa.hibernate.ddl-auto=update # o create o create-drop si quieres que Hibernate cree/actualice el esquema
+spring.jpa.show-sql=true
+
+Asegúrese de reemplazar localhost:3306, cafetienda_db, tu_usuario_mysql y tu_contraseña_mysql con sus propios datos.
+
+3. Requisitos Previos
+   Asegúrese de tener instalados:
+
+Java Development Kit (JDK) 21 o superior.
+
+Maven (o utilice el mvnw wrapper incluido en el proyecto, que es lo recomendado).
+
+4. Construir el Proyecto
+   Desde la raíz del directorio del proyecto (Proyecto-Final) en su terminal, ejecute el siguiente comando para limpiar, compilar e instalar las dependencias:
 
 ./mvnw clean install -U
 
-Este comando limpiará, compilará e instalará las dependencias del proyecto. Deberías ver un mensaje BUILD SUCCESS al finalizar.
+Debería ver un mensaje BUILD SUCCESS al finalizar.
 
-Ejecutar la Aplicación Spring Boot:
-Puedes ejecutar la aplicación desde tu IDE (IntelliJ IDEA, Eclipse, etc.), buscando la clase principal com.techlab.CafetiendaApplication y ejecutando su método main().
+5. Ejecutar la Aplicación Spring Boot
+   Puede iniciar la aplicación de dos maneras:
 
-Alternativamente, puedes ejecutar desde la terminal (después del mvnw clean install):
+Desde su IDE (IntelliJ IDEA, Eclipse, VS Code): Abra el proyecto en su IDE, navegue a la clase principal com.techlab.CafetiendaApplication y ejecute su método main().
+
+Desde la Terminal: (Después de mvnw clean install):
 
 java -jar target/cafetienda-0.0.1-SNAPSHOT.jar
 
-Acceder a la Aplicación:
-Una vez que la aplicación se inicie (verás un mensaje en la consola como Tomcat started on port 8080), abre tu navegador web y visita:
+6. Acceder a la Aplicación
+   Una vez que la aplicación se inicie (verá mensajes en la consola indicando que Tomcat ha iniciado en el puerto 8080), abra su navegador web y visite:
 
 http://localhost:8080/
 
-Acceder a la Consola H2 (Opcional):
-Puedes verificar la base de datos H2 en memoria visitando la consola:
-
-http://localhost:8080/h2-console
-
-JDBC URL: jdbc:h2:mem:cafetienda_db
-
-User Name: sa
-
-Password: (dejar vacío)
-
-Haz clic en "Connect" y podrás ver las tablas y datos.
-
 🧪 Datos de Prueba y Verificación
-Clientes: Para probar la sección de pedidos, puedes usar los siguientes DNIs de prueba: 11223344, 22334455, 33445566, 44556677.
+Para facilitar las pruebas de la aplicación:
 
-Productos: Al filtrar por categoría, utiliza Cafe, Te o Accesorio (la aplicación debería manejar correctamente las mayúsculas/minúsculas). Hay suficientes productos cargados para observar la paginación.
+Clientes: Para interactuar con la sección de pedidos, puede utilizar los siguientes DNIs de prueba: 11223344, 22334455, 33445566, 44556677.
+
+Productos: Al filtrar por categoría, utilice Cafe, Te o Accesorio. La aplicación maneja correctamente las mayúsculas/minúsculas en el filtrado. Hay suficientes productos cargados para observar la paginación y los indicadores de stock.
 
 👤 Autora
-[Marcela Arroyo]
-
-[marcela68.ma@gmail.com]
+Marcela Arroyo
 
 📜 Licencia
-Este proyecto está bajo la licencia [Tu Licencia, ej. MIT License] - ver el archivo LICENSE.md para más detalles (si aplicable).
+Este proyecto está bajo la Licencia MIT. Puede encontrar más detalles en el archivo LICENSE.md (si lo añade al repositorio).
