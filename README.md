@@ -1,5 +1,5 @@
 ☕ Proyecto Final: Sistema de Gestión para Cafeterías
-Este repositorio contiene la implementación final de un sistema web integral, diseñado para la gestión eficiente de productos, clientes y el proceso de compra en una cafetería. Desarrollado con Spring Boot, este proyecto fusiona una potente lógica de backend con una interfaz de usuario interactiva y fluida.
+Este repositorio contiene la implementación de un sistema web integral diseñado para la gestión eficiente de productos, clientes y el proceso de compra en una cafetería. Desarrollado con Spring Boot, este proyecto combina una potente lógica de backend con una interfaz de usuario interactiva y fluida.
 
 ✨ Características Destacadas
 Este sistema ha sido desarrollado con el objetivo de ofrecer una experiencia completa y optimizada para la administración de un negocio de cafetería, incluyendo las siguientes funcionalidades clave:
@@ -35,6 +35,15 @@ Registro de Compra Condicional: La compra se registra y el stock se descuenta pe
 
 Generación de Factura: Una vez finalizada, se genera una factura detallada para la impresión, con opciones de forma de pago y aplicación de descuentos.
 
+🌿 Estrategia de Ramas
+Este repositorio mantiene dos ramas principales para facilitar el desarrollo y la evaluación:
+
+main: Esta rama representa la versión estable del proyecto, configurada para utilizar MySQL como base de datos persistente. Es ideal para entornos de producción o para desarrolladores que deseen configurar una base de datos MySQL local.
+
+demo-h2: Esta rama es una versión optimizada para demostraciones y desarrollo local rápido. Está configurada para usar H2 Database (en memoria), lo que elimina la necesidad de configurar una instancia de MySQL. Los datos iniciales se cargan automáticamente desde src/main/resources/data.sql al iniciar la aplicación, permitiendo una puesta en marcha instantánea para pruebas y evaluación.
+
+Se recomienda utilizar la rama demo-h2 para una experiencia de prueba y evaluación más sencilla, sin dependencias externas de base de datos.
+
 🛠️ Tecnologías Utilizadas
 Este proyecto ha sido construido utilizando una combinación de tecnologías modernas para garantizar robustez y escalabilidad:
 
@@ -63,8 +72,31 @@ Font Awesome: Para íconos escalables y personalizables.
 📂 Organización del Código
 El proyecto sigue una estructura modular y organizada, facilitando la comprensión y el mantenimiento. Los paquetes principales del backend y los directorios de recursos del frontend están estructurados de la siguiente manera:
 
-
-
+├── src/
+│   ├── main/
+│   │   ├── java/
+│   │   │   └── com/techlab/
+│   │   │       ├── CafetiendaApplication.java  # Clase principal de la aplicación
+│   │   │       ├── config/                   # Clases de configuración (ej. DataLoader)
+│   │   │       ├── clientes/                 # Lógica para la gestión de clientes
+│   │   │       ├── productos/                # Lógica para la gestión de productos
+│   │   │       ├── pedidos/                  # ✅ CORREGIDO: Lógica para el proceso de compra/pedidos
+│   │   │       ├── util/                     # ✅ AÑADIDO: Clases de utilidades generales
+│   │   │       ├── view/                     # ✅ AÑADIDO: Clases relacionadas con la vista (ej. DTOs, controladores de vista)
+│   │   │       └── excepciones/              # Clases de excepciones personalizadas
+│   │   └── resources/
+│   │       ├── static/                     # Archivos estáticos (CSS, JS, imágenes)
+│   │       │   ├── css/
+│   │       │   └── js/
+│   │       ├── templates/                  # Plantillas HTML (Thymeleaf)
+│   │       ├── application.properties      # Configuración de la aplicación y base de datos
+│   │       └── data.sql                    # Script para cargar datos iniciales (para H2)
+│   └── test/
+│       └── java/
+│           └── com/techlab/
+│               └── CafetiendaApplicationTests.java # Clases de pruebas
+├── pom.xml                                 # Archivo de configuración de Maven
+└── README.md                               # Este archivo
 
 ⚙️ Configuración y Ejecución
 Siga estos pasos para levantar y probar la aplicación en su entorno local:
@@ -75,14 +107,15 @@ Siga estos pasos para levantar y probar la aplicación en su entorno local:
 git clone https://github.com/Azoka23/Proyecto-Final.git
 cd Proyecto-Final
 
-2. Configuración de la Base de Datos (MySQL)
+2. Configuración de la Base de Datos
+   Para la rama main (MySQL):
    Este proyecto está configurado para usar MySQL. Necesitará:
 
 Una instancia de MySQL en ejecución (local o remota).
 
 Crear una base de datos específica para este proyecto (ej. cafetienda_db).
 
-Actualizar las credenciales de conexión en el archivo src/main/resources/application.properties (o application.yml):
+Actualizar las credenciales de conexión en el archivo src/main/resources/application.properties:
 
 # Ejemplo de configuración para application.properties
 spring.datasource.url=jdbc:mysql://localhost:3306/cafetienda_db?useSSL=false&serverTimezone=UTC
@@ -92,6 +125,9 @@ spring.jpa.hibernate.ddl-auto=update # o create o create-drop si quieres que Hib
 spring.jpa.show-sql=true
 
 Asegúrese de reemplazar localhost:3306, cafetienda_db, tu_usuario_mysql y tu_contraseña_mysql con sus propios datos.
+
+Para la rama demo-h2 (H2 en memoria):
+Si está utilizando la rama demo-h2, la configuración de la base de datos ya está establecida para H2 en memoria en application.properties y los datos iniciales se cargan automáticamente mediante data.sql y DataLoader.java. No se requiere configuración manual de MySQL para esta rama.
 
 3. Requisitos Previos
    Asegúrese de tener instalados:
@@ -112,7 +148,7 @@ Debería ver un mensaje BUILD SUCCESS al finalizar.
 
 Desde su IDE (IntelliJ IDEA, Eclipse, VS Code): Abra el proyecto en su IDE, navegue a la clase principal com.techlab.CafetiendaApplication y ejecute su método main().
 
-Desde la Terminal: (Después de mvnw clean install):
+Desde la Terminal: (Después de ./mvnw clean install):
 
 java -jar target/cafetienda-0.0.1-SNAPSHOT.jar
 
@@ -132,4 +168,4 @@ Productos: Al filtrar por categoría, utilice Cafe, Te o Accesorio. La aplicaci�
 Marcela Arroyo
 
 📜 Licencia
-Este proyecto está bajo la Licencia MIT. Puede encontrar más detalles en el archivo LICENSE.md (si lo añade al repositorio).
+Este proyecto está bajo la Licencia MIT. Para más detalles, consulte el archivo LICENSE en la raíz del repositorio.
