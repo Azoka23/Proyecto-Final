@@ -3,6 +3,7 @@
 /Users/marcelaaliciaarroyo/Desktop/JAVA  TECH/Proyecto-Final/src/main/java/com/techlab/clientes/ClienteController.java
 /Users/marcelaaliciaarroyo/Desktop/JAVA  TECH/Proyecto-Final/src/main/java/com/techlab/clientes/ClienteRepository.java
 /Users/marcelaaliciaarroyo/Desktop/JAVA  TECH/Proyecto-Final/src/main/java/com/techlab/clientes/ClienteService.java
+/Users/marcelaaliciaarroyo/Desktop/JAVA  TECH/Proyecto-Final/src/main/java/com/techlab/config/DataLoader.java
 /Users/marcelaaliciaarroyo/Desktop/JAVA  TECH/Proyecto-Final/src/main/java/com/techlab/config/WebConfig.java
 /Users/marcelaaliciaarroyo/Desktop/JAVA  TECH/Proyecto-Final/src/main/java/com/techlab/excepciones/ClienteNoEncontradoException.java
 /Users/marcelaaliciaarroyo/Desktop/JAVA  TECH/Proyecto-Final/src/main/java/com/techlab/excepciones/ProductoNoEncontradoException.java

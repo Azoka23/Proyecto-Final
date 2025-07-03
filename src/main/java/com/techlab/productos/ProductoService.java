@@ -3,10 +3,9 @@ package com.techlab.productos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.techlab.excepciones.ProductoNoEncontradoException;
-import org.springframework.data.domain.Page; // ¡Nuevo import necesario!
-import org.springframework.data.domain.Pageable; // ¡Nuevo import necesario!
-// import org.springframework.data.domain.Sort; // Este import ya no es necesario si Sort se gestiona con Pageable
-import java.util.List; // Este import es para los otros métodos que devuelven List
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import java.util.List;
 
 @Service
 public class ProductoService {
@@ -24,24 +23,20 @@ public class ProductoService {
         return productoRepository.findByNombre(nombre);
     }
 
-    // ✅ NUEVO MÉTODO: listarProductosPaginados para la paginación
+    // ✅ MÉTODO CORREGIDO: listarProductosPaginados ahora llama a findByCategoriaIgnoreCase
     // Este método es llamado desde ProductoController
     public Page<Producto> listarProductosPaginados(String categoria, Pageable pageable) {
         if (categoria != null && !categoria.isBlank()) {
             // Si se proporciona una categoría, busca productos por categoría con paginación
-            return productoRepository.findByCategoria(categoria, pageable);
+            // ✅ CAMBIO CLAVE: Usar findByCategoriaIgnoreCase para que no distinga mayúsculas/minúsculas
+            return productoRepository.findByCategoriaIgnoreCase(categoria, pageable);
         } else {
             // Si no se proporciona categoría, busca todos los productos con paginación
             return productoRepository.findAll(pageable);
         }
     }
 
-    // Métodos CRUD (el método listarProductos original ya no se usa directamente para la paginación)
-    // Puedes mantener el método 'listarProductos' si aún tienes otras partes de tu aplicación
-    // que lo llaman para obtener una lista sin paginar, pero para la paginación usaremos el nuevo.
-    // public List<Producto> listarProductos(String sortBy, String order, String categoria) { /* ... */ }
-
-
+    // Métodos CRUD
     public void agregarProducto(Producto producto) {
         productoRepository.save(producto); // Guarda el producto en la base de datos
     }

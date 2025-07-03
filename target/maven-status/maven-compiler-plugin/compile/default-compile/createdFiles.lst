@@ -4,6 +4,7 @@ com/techlab/pedidos/CompraRealizada.class
 com/techlab/productos/CafeRepository.class
 com/techlab/view/HomeController.class
 com/techlab/clientes/Cliente.class
+com/techlab/config/DataLoader.class
 com/techlab/clientes/ClienteController.class
 com/techlab/pedidos/CompraRealizadaService.class
 com/techlab/pedidos/CompraRealizadaController.class
