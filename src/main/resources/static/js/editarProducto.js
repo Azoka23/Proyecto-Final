@@ -95,7 +95,7 @@
          e.preventDefault();
 
          if (!nombreInputEditar.value.trim()) {
-             mostrarMensajeTemporal("El nombre del producto no puede estar vacío.", "error");
+             mostrarMensajeTemporal("El nombre  del producto no puede estar vacío.", "error");
              return;
          }
          if (isNaN(parseInt(stockInputEditar.value))) {
