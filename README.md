@@ -91,7 +91,8 @@ Siga estos pasos para levantar y probar la aplicación en su entorno local:
    🧪 Datos de Prueba y Verificación
 * Clientes: Utilice DNIs de prueba como 11223344, 22334455, 33445566, 44556677.
 * Productos: Filtre por Cafe, Te o Accesorio.
-  📚 Documentación Adicional
+
+   📚 Documentación Adicional
   Se han creado documentos detallados en la carpeta docs/. Puedes acceder a ellos directamente desde aquí:
 * Arquitectura del Sistema: Ver arquitectura.md
     * Describe los componentes principales, las capas y el flujo de interacción del sistema.
