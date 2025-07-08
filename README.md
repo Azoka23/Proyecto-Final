@@ -40,7 +40,7 @@ Este proyecto ha sido construido utilizando una combinación de tecnologías mod
 
 ## 📂 Organización del Código
 El proyecto sigue una estructura modular y organizada, facilitando la comprensión y el mantenimiento. Los paquetes principales del backend y los directorios de recursos del frontend están estructurados de la siguiente manera:
-
+```
 ├── src/
 │   ├── main/
 │   │   ├── java/
@@ -73,6 +73,23 @@ El proyecto sigue una estructura modular y organizada, facilitando la comprensi�
 ├── base_de_datos.md
 └── flujo_de_compra_detallado.md
 
+```
+
+---
+
+---
+
+## 📚 Documentación Adicional
+Para una evaluación más profunda y para mostrar un proyecto aún más profesional, se han creado documentos detallados en la carpeta `docs/`. Puedes acceder a ellos directamente desde aquí:
+
+* **Arquitectura del Sistema:** [Ver arquitectura.md](https://github.com/Azoka23/Proyecto-Final/blob/main/docs/arquitectura.md)
+  * Describe los componentes principales, las capas y el flujo de interacción del sistema.
+* **Esquema de Base de Datos:** [Ver base_de_datos.md](https://github.com/Azoka23/Proyecto-Final/blob/main/docs/base_de_datos.md)
+  * Detalla la estructura de las tablas, sus relaciones y las consideraciones de persistencia.
+* **Flujo Detallado del Proceso de Compra:** [Ver flujo_de_compra_detallado.md](https://github.com/Azoka23/Proyecto-Final/blob/main/docs/flujo_de_compra_detallado.md)
+  * Explica paso a paso el proceso de venta, desde la selección de productos hasta la generación de la factura.
+
+---
 
 ## 🚀 Configuración y Ejecución Local
 Siga estos pasos para levantar y probar la aplicación en su entorno local:
@@ -83,6 +100,7 @@ Abra su terminal y clone el proyecto:
 ```bash
 git clone [https://github.com/Azoka23/Proyecto-Final.git](https://github.com/Azoka23/Proyecto-Final.git)
 cd Proyecto-Final
+```
 2. Configuración de la Base de Datos
 La aplicación utiliza perfiles para la base de datos.
 
@@ -98,40 +116,13 @@ Maven (o utilice el mvnw wrapper incluido).
 4. Construir el Proyecto
 Desde la raíz del proyecto, ejecute para limpiar, compilar e instalar dependencias:
 
-Bash
+./mvnw clean install -U
 
 ./mvnw clean install -U
-5. Ejecutar la Aplicación Spring Boot
-Utilice las "Run Configurations" de Maven en IntelliJ IDEA (o la línea de comandos):
 
-Para MySQL: Seleccione la configuración CafetiendaApplication (MySQL) (o ejecute java -jar target/cafetienda-0.0.1-SNAPSHOT.jar --spring.profiles.active=mysql).
 
-Para H2: Seleccione la configuración CafetiendaApplication (H2) (o ejecute java -jar target/cafetienda-0.0.1-SNAPSHOT.jar --spring.profiles.active=h2).
 
-6. Acceder a la Aplicación
-Una vez iniciada, abra su navegador web y visite:
 
-http://localhost:8080/
-
-🧪 Datos de Prueba y Verificación
-Clientes: Utilice DNIs de prueba como 11223344, 22334455, 33445566, 44556677.
-
-Productos: Filtre por Cafe, Te o Accesorio.
-
-📚 Documentación Adicional
-Para una evaluación más profunda y para mostrar un proyecto aún más profesional, se han creado documentos detallados en la carpeta docs/. Puedes acceder a ellos directamente desde aquí:
-
-Arquitectura del Sistema: [Ver arquitectura.md](./docs/arquitectura.md)
-
-Describe los componentes principales, las capas y el flujo de interacción del sistema.
-
-Esquema de Base de Datos: [Ver base_de_datos.md](./docs/base_de_datos.md)
-
-Detalla la estructura de las tablas, sus relaciones y las consideraciones de persistencia.
-
-Flujo Detallado del Proceso de Compra: [Ver flujo_de_compra_detallado.md](./docs/flujo_de_compra_detallado.md)
-
-Explica paso a paso el proceso de venta, desde la selección de productos hasta la generación de la factura.
 
 
 👤 Autora
