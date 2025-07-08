@@ -5,21 +5,22 @@ Este documento describe el flujo completo del proceso de compra dentro del Siste
    El proceso de compra está diseñado para ser intuitivo y controlado, permitiendo al administrador gestionar los pedidos de los clientes de manera eficiente y con validaciones en tiempo real.
 ```mermaid
 graph TD
-A[Inicio de Venta / Página de Productos] --> B{Administrador selecciona productos};
-B --> C{Producto añadido al Carrito (Frontend)};
-C --> D[Actualización visual de Stock y Total en Frontend];
-D -- (Opcional) --> E{Administrador ajusta cantidades o elimina productos};
-E --> D;
-C --> F{Stock en Frontend se ajusta (no en DB)};
-F --> G[Revisión del Carrito y Selección de Pago/Descuento];
-G --> H{Administrador confirma la compra};
-H --> I[Llamada al Backend para Finalizar Compra];
-I --> J{Backend: Valida Stock y Descuenta de DB};
-J -- (Si hay error de stock) --> K[Backend: Retorna error al Frontend];
-J -- (Si es exitoso) --> L{Backend: Registra Compra y Items en DB};
-L --> M[Backend: Genera Factura];
-M --> N[Frontend: Muestra Factura y Limpia Carrito];
-K --> O[Frontend: Muestra mensaje de error];
+A[Inicio de Venta / Página de Productos] --> B{Administrador selecciona productos}
+B --> C{Producto añadido al Carrito - Frontend}
+C --> D[Actualización visual de Stock y Total en Frontend]
+D --> E{Administrador ajusta cantidades o elimina productos}
+E --> D
+C --> F{Stock en Frontend se ajusta - no en DB}
+F --> G[Revisión del Carrito y Selección de Pago/Descuento]
+G --> H{Administrador confirma la compra}
+H --> I[Llamada al Backend para Finalizar Compra]
+I --> J{Backend: Valida Stock y Descuenta de DB}
+J -- Si hay error de stock --> K[Backend: Retorna error al Frontend]
+J -- Si es exitoso --> L{Backend: Registra Compra y Items en DB}
+L --> M[Backend: Genera Factura]
+M --> N[Frontend: Muestra Factura y Limpia Carrito]
+K --> O[Frontend: Muestra mensaje de error]
+
 ```
 ---
 ## 2. Pasos Detallados del Proceso
