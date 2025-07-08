@@ -3,7 +3,7 @@ Este documento describe el flujo completo del proceso de compra dentro del Siste
 ---
 ## 1. Visión General del Flujo
    El proceso de compra está diseñado para ser intuitivo y controlado, permitiendo al administrador gestionar los pedidos de los clientes de manera eficiente y con validaciones en tiempo real.
-```
+```mermaid
 graph TD
 A[Inicio de Venta / Página de Productos] --> B{Administrador selecciona productos};
 B --> C{Producto añadido al Carrito (Frontend)};
