@@ -1,17 +1,20 @@
-Arquitectura del Sistema de Gestión para Cafeterías
+# Arquitectura del Sistema de Gestión para Cafeterías
 Este documento describe la arquitectura de alto nivel del Sistema de Gestión para Cafeterías, destacando sus componentes principales y el flujo de interacción. El diseño se enfoca en la modularidad, la escalabilidad y la facilidad de mantenimiento, siguiendo las mejores prácticas de desarrollo con Spring Boot.
 
-1. Visión General de la Arquitectura
-   El sistema sigue un modelo clásico de arquitectura de tres capas (o n-capas), donde el frontend y el backend están estrechamente integrados a través de un motor de plantillas del lado del servidor (Thymeleaf), y el backend interactúa con una capa de persistencia de datos.
+---
 
+## 1. Visión General de la Arquitectura
+El sistema sigue un modelo clásico de arquitectura de tres capas (o n-capas), donde el frontend y el backend están estrechamente integrados a través de un motor de plantillas del lado del servidor (Thymeleaf), y el backend interactúa con una capa de persistencia de datos.
+
+```mermaid
 graph TD
 A[Navegador Web del Administrador] -->|Solicitudes HTTP| B(Capa de Presentación - Frontend Thymeleaf/JS)
 B -->|Llamadas a Endpoints REST/HTML| C(Capa de Lógica de Negocio - Backend Spring Boot)
 C -->|Operaciones JPA/Hibernate| D(Capa de Persistencia - Spring Data JPA)
 D -->|Consultas SQL| E[Base de Datos - MySQL / H2]
-
+```
 2. Componentes Clave del Backend (Spring Boot)
-   El backend está construido sobre el framework Spring Boot, organizando la lógica en capas bien definidas:
+El backend está construido sobre el framework Spring Boot, organizando la lógica en capas bien definidas:
 
 Controladores (@Controller / @RequestMapping):
 
@@ -50,7 +53,7 @@ Configuración (@Configuration):
 Clases para la configuración de la aplicación (ej. DataLoader para la carga inicial de datos, configuración de perfiles).
 
 3. Interacción Frontend (Thymeleaf y JavaScript)
-   El frontend se construye utilizando:
+El frontend se construye utilizando:
 
 Thymeleaf: Un motor de plantillas del lado del servidor que permite renderizar dinámicamente las vistas HTML, inyectando datos del backend.
 
@@ -59,7 +62,7 @@ JavaScript (Vanilla JS): Se utiliza para añadir interactividad en el lado del c
 CSS3: Para el estilizado y el diseño responsivo de la interfaz de usuario.
 
 4. Persistencia de Datos
-   La capa de persistencia se gestiona a través de Spring Data JPA e Hibernate, permitiendo una interacción robusta con la base de datos.
+La capa de persistencia se gestiona a través de Spring Data JPA e Hibernate, permitiendo una interacción robusta con la base de datos.
 
 Base de Datos Relacional:
 
@@ -70,7 +73,7 @@ H2 Database (en memoria): Empleado para entornos de desarrollo y pruebas rápida
 Perfiles de Spring Boot: La configuración de la base de datos se gestiona mediante perfiles (application-mysql.properties, application-h2.properties), lo que permite una flexibilidad total para cambiar el entorno de ejecución sin modificar el código.
 
 5. Patrones de Diseño y Buenas Prácticas
-   Arquitectura en Capas: Separa claramente las responsabilidades, mejorando la modularidad y la mantenibilidad.
+Arquitectura en Capas: Separa claramente las responsabilidades, mejorando la modularidad y la mantenibilidad.
 
 Patrón DTO (Data Transfer Object): Utilizado para transferir datos entre las capas, desacoplando el modelo de dominio de la capa de presentación.
 
@@ -80,4 +83,7 @@ Manejo de Excepciones Centralizado: Mejora la robustez y la experiencia de usuar
 
 Herencia JPA: Aplicada en el modelo Producto para una estructura de datos más organizada y extensible.
 
-Volver al README principal
+[Volver al README principal.](../README.md)
+
+
+---

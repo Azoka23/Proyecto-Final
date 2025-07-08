@@ -73,4 +73,4 @@ Limpieza del Carrito: El carrito en localStorage se vacía, preparando el sistem
 
 Manejo de Errores: En caso de un error (ej. stock insuficiente), el frontend muestra un mensaje claro al administrador sin que la compra se finalice.
 
-Volver al README principa
+[Volver al README principal.](../README.md)

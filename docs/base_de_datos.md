@@ -1,112 +1,106 @@
-Esquema de Base de Datos del Sistema de Gestión para Cafeterías
-Este documento detalla el esquema de la base de datos utilizado por el Sistema de Gestión para Cafeterías. Se describe la estructura de las tablas, sus relaciones y las consideraciones clave en el diseño de la persistencia de datos.
+# Esquema de Base de Datos del Sistema de Gestión para Cafeterías
+Este documento describe el esquema de la base de datos del Sistema de Gestión para Cafeterías, detallando la estructura de sus tablas y las relaciones clave.
 
-1. Visión General del Esquema
-   El diseño de la base de datos se centra en la eficiencia y la integridad de los datos para la gestión de productos, clientes y el registro de compras. Se utiliza un enfoque relacional, mapeado a entidades Java mediante Spring Data JPA y Hibernate.
+---
 
+## 1. Diagrama de Entidad-Relación (ERD)
+El siguiente diagrama muestra las entidades principales y cómo se relacionan en la base de datos:
+
+```mermaid
 erDiagram
-cliente ||--o{ compra_realizada : "realiza"
-producto ||--o{ item_compra : "contiene"
-compra_realizada ||--o{ item_compra : "incluye"
+    cliente ||--o{ compra_realizada : "realiza"
+    producto ||--o{ item_compra : "contiene"
+    compra_realizada ||--o{ item_compra : "incluye"
 
     cliente {
-        VARCHAR dni PK "DNI del cliente (clave primaria)"
-        VARCHAR nombre "Nombre completo del cliente"
-        VARCHAR email
+        VARCHAR dni PK "DNI del cliente"
+        VARCHAR nombre "Nombre del cliente"
+        VARCHAR email "Email del cliente"
     }
 
     producto {
-        BIGINT id PK "Identificador único (auto-incremento)"
+        BIGINT id PK "ID único del producto"
         VARCHAR dtype "Tipo de producto (CAFETERIA, TE, ACCESORIO)"
-        VARCHAR nombre
-        VARCHAR categoria
-        DOUBLE precio
-        INT cantidad_en_stock
+        VARCHAR nombre "Nombre del producto"
+        VARCHAR categoria "Categoría"
+        DOUBLE precio "Precio de venta"
+        INT cantidad_en_stock "Stock disponible"
     }
 
     compra_realizada {
-        BIGINT id PK "Identificador único (auto-incremento)"
-        VARCHAR cliente_dni FK "DNI del cliente que realizó la compra"
-        DATETIME fecha
-        DOUBLE total
-        LONGTEXT detalle "Detalle de la compra (ej. JSON de ítems)"
+        BIGINT id PK "ID único de la compra"
+        VARCHAR cliente_dni FK "DNI del cliente (FK)"
+        DATETIME fecha "Fecha y hora de la compra"
+        DOUBLE total "Monto total"
+        LONGTEXT detalle "Detalle adicional de la compra"
     }
 
     item_compra {
-        BIGINT id PK "Identificador único (auto-incremento)"
-        BIGINT compra_id FK
-        BIGINT producto_id FK
-        INT cantidad
-        DOUBLE precio_unitario "Precio del producto en el momento de la compra"
+        BIGINT id PK "ID único del ítem de compra"
+        BIGINT compra_id FK "ID de la compra (FK)"
+        BIGINT producto_id FK "ID del producto (FK)"
+        INT cantidad "Cantidad del producto"
+        DOUBLE precio_unitario "Precio unitario al momento de la compra"
     }
+2. Descripción de Tablas Principales
+cliente
+Almacena la información de los clientes.
 
-2. Descripción de Tablas y Entidades
-   cliente
-   Almacena la información de los clientes del negocio.
+dni (PK): Identificador único del cliente.
 
-dni: VARCHAR(255). Número de DNI del cliente. Actúa como clave primaria (PK).
+nombre: Nombre completo del cliente.
 
-nombre: VARCHAR(255). Nombre completo del cliente. Puede ser nulo.
-
-email: VARCHAR(255). Correo electrónico del cliente. Puede ser nulo.
+email: Correo electrónico del cliente.
 
 producto
-Almacena la información de los productos disponibles en la cafetería. Esta tabla utiliza un enfoque de herencia (dtype - Discriminator Column) para diferenciar entre tipos de productos.
+Almacena los productos disponibles, con un campo dtype para diferenciar entre tipos de productos (café, té, accesorios).
 
-id: BIGINT(20). Identificador único del producto. Clave primaria (PK) y auto-incremental.
+id (PK): Identificador único del producto.
 
-dtype: VARCHAR(31). Columna discriminadora que indica el tipo de producto (ej. 'CAFETERIA', 'TE', 'ACCESORIO'). No nulo.
+dtype: Discriminador para tipo de producto.
 
-nombre: VARCHAR(255). Nombre del producto. Puede ser nulo.
+nombre: Nombre del producto.
 
-categoria: VARCHAR(255). Categoría del producto. Puede ser nulo.
+categoria: Categoría del producto.
 
-precio: DOUBLE. Precio de venta del producto. No nulo.
+precio: Precio de venta.
 
-cantidad_en_stock: INT(11). Cantidad disponible del producto en inventario. No nulo.
+cantidad_en_stock: Cantidad disponible en inventario.
 
 compra_realizada
 Registra cada transacción de compra.
 
-id: BIGINT(20). Identificador único de la compra. Clave primaria (PK) y auto-incremental.
+id (PK): Identificador único de la compra.
 
-cliente_dni: VARCHAR(255). Clave foránea que referencia al DNI del cliente que realizó la compra. Puede ser nulo (si la compra no está asociada a un cliente registrado).
+cliente_dni (FK): DNI del cliente asociado a la compra.
 
-fecha: DATETIME(6). Fecha y hora exacta en que se realizó la compra. Puede ser nulo.
+fecha: Fecha y hora de la compra.
 
-total: DOUBLE. Monto total final de la compra. No nulo.
+total: Monto total de la compra.
 
-detalle: LONGTEXT. Campo para almacenar detalles adicionales de la compra, posiblemente un JSON con información de ítems o descuentos aplicados. Puede ser nulo.
+detalle: Información adicional de la compra (ej. formato JSON).
 
 item_compra
 Representa cada línea de una compra, detallando los productos y sus cantidades.
 
-id: BIGINT(20). Identificador único del ítem de compra. Clave primaria (PK) y auto-incremental.
+id (PK): Identificador único del ítem.
 
-cantidad: INT(11). Cantidad de este producto en el ítem de compra. No nulo.
+compra_id (FK): ID de la compra a la que pertenece.
 
-precio_unitario: DOUBLE. Precio del producto en el momento exacto de la compra. No nulo.
+producto_id (FK): ID del producto específico.
 
-compra_id: BIGINT(20). Clave foránea que referencia a la compra a la que pertenece este ítem. Puede ser nulo.
+cantidad: Cantidad de este producto en el ítem.
 
-producto_id: BIGINT(20). Clave foránea que referencia al producto específico de este ítem. Puede ser nulo.
-
+precio_unitario: Precio del producto al momento de la compra.
+```
 3. Relaciones Clave
-   cliente 1 -- N compra_realizada: Un cliente puede realizar múltiples compras, pero cada compra está asociada a un único cliente (referenciado por su DNI).
+Cliente - Compra: Un cliente puede realizar múltiples compras (1:N).
 
-compra_realizada 1 -- N item_compra: Una compra puede contener múltiples ítems de compra, pero cada ítem pertenece a una única compra.
+Compra - Ítem de Compra: Una compra puede incluir múltiples ítems (1:N).
 
-producto 1 -- N item_compra: Un producto puede aparecer en múltiples ítems de compra (en diferentes compras), pero cada ítem de compra se refiere a un único producto.
+Producto - Ítem de Compra: Un producto puede aparecer en múltiples ítems de compra (1:N).
 
-4. Consideraciones de Persistencia y Perfiles de Base de Datos
-   Spring Data JPA: Simplifica enormemente la implementación de la capa de persistencia, generando automáticamente gran parte del código boilerplate para las operaciones CRUD.
+[Volver al README principal.](../README.md)
 
-Herencia JPA (@Inheritance): La entidad Producto utiliza herencia para manejar diferentes tipos de productos de manera polimórfica, lo que permite un modelo de datos más limpio y extensible.
 
-Gestión por Perfiles de Spring Boot: El proyecto está configurado para trabajar con diferentes bases de datos según el perfil activo, lo que proporciona flexibilidad para distintos entornos:
-
-Perfil mysql: Utiliza MySQL como base de datos persistente. Ideal para entornos de producción o desarrollo con datos duraderos.
-
-Perfil h2: Utiliza H2 Database (en memoria). Los datos iniciales se cargan automáticamente desde data.sql y el DataLoader al iniciar la aplicación, facilitando el desarrollo y las pruebas rápidas sin configuración externa.
-
-Volver al README principal
+---
