@@ -3,7 +3,7 @@ Este documento describe el flujo completo del proceso de compra dentro del Siste
 
 1. Visión General del Flujo
    El proceso de compra está diseñado para ser intuitivo y controlado, permitiendo al administrador gestionar los pedidos de los clientes de manera eficiente y con validaciones en tiempo real.
-
+```
 graph TD
 A[Inicio de Venta / Página de Productos] --> B{Administrador selecciona productos};
 B --> C{Producto añadido al Carrito (Frontend)};
@@ -20,7 +20,7 @@ J -- (Si es exitoso) --> L{Backend: Registra Compra y Items en DB};
 L --> M[Backend: Genera Factura];
 M --> N[Frontend: Muestra Factura y Limpia Carrito];
 K --> O[Frontend: Muestra mensaje de error];
-
+```
 2. Pasos Detallados del Proceso
    2.1. Inicio de una Nueva Venta
    El administrador accede a la interfaz de venta, que muestra el catálogo de productos disponibles.
