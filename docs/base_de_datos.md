@@ -42,6 +42,9 @@ erDiagram
         INT cantidad "Cantidad del producto"
         DOUBLE precio_unitario "Precio unitario al momento de la compra"
     }
+    
+   ```
+    
 2. Descripción de Tablas Principales
 cliente
 Almacena la información de los clientes.
@@ -91,14 +94,15 @@ producto_id (FK): ID del producto específico.
 
 cantidad: Cantidad de este producto en el ítem.
 
-precio_unitario: Precio del producto al momento de la compra.
-```
+precio_unitario: Precio unitario al momento de la compra.
+
 3. Relaciones Clave
 Cliente - Compra: Un cliente puede realizar múltiples compras (1:N).
 
 Compra - Ítem de Compra: Una compra puede incluir múltiples ítems (1:N).
 
 Producto - Ítem de Compra: Un producto puede aparecer en múltiples ítems de compra (1:N).
+
 
 [Volver al README principal.](../README.md)
 
